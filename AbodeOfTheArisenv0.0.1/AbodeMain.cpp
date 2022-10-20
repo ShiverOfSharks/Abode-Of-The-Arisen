@@ -4,9 +4,15 @@
 
 /* Global variable defintions go here. - Dorien */
 #include "AbodeHeader.h"
+#include <string>
 using namespace std;
+string input;
 
-#define Abode[3][3]; // Floor layout. Used to denote where the player is, and as a check for events and possible dialogue. Very integral. - Dorien
+void playerChoice();
+
+//#define Abode[3][3]; // Floor layout. Used to denote where the player is, and as a check for events and possible dialogue. Very integral. - Dorien
+
+// Had to comment out the line of code above because it was causing an error - Doug
 
 
 /* Functions go here. Only make calls in main(), please do NOT
@@ -21,7 +27,8 @@ void DisplayBackstory() // displays the opening preamble. Called to first thing 
 	cout << "You are in Hallway. Type MOVE [Direction] (NORTH, SOUTH, EAST, or WEST) to move in that direction. Type LOOK to have a look at your surroundings." << endl;
 	cout << "Type LOOK AT to look at more specific points or items of interest. Type PICK UP to grab something, and type STUFF to see your inventory." << endl;
 	cout << "If you ever get stuck, type RESET to give into the zombie hor-er, I mean, reset the game to here." << endl;
-	cout << "You should probably find a way to shut that alarm off...the controls should be in the kitchen to your east." << endl;;
+	cout << "You should probably find a way to shut that alarm off...the controls should be in the kitchen to your east." << endl;
+	playerChoice();
 }
 
 
@@ -32,4 +39,37 @@ int main()
 	DisplayBackstory();
 
 	return 0; // Exit program successfully.
+}
+void playerChoice()
+{
+	cin >> input;
+
+	if (input == "north")
+	{
+		cout << "player moves north";
+	}
+	else if (input == "south")
+	{
+		cout << "player moves south";
+	}
+	else if (input == "east")
+	{
+		cout << "player moves east";
+	}
+	else if (input == "west")
+	{
+		cout << "player moves west";
+	}
+	else if (input == "reset")
+	{
+		cout << "player reset the game";
+		//clear screen
+		//clear inventory
+		//reset events
+	}
+	else
+	{
+		cout << "invalid input, try again";
+	}
+
 }
