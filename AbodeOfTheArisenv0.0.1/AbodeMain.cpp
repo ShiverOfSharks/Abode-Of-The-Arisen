@@ -10,9 +10,6 @@ string input;
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
 string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
 
-
-void playerChoice();
-
 //#define Abode[3][3]; // Floor layout. Used to denote where the player is, and as a check for events and possible dialogue. Very integral. - Dorien
 
 // Had to comment out the line of code above because it was causing an error - Doug
@@ -22,10 +19,41 @@ void playerChoice();
 	define functions in main(). And of course, make sure to
 	follow coding standards. - Dorien */
 
+/* Displays a description of the current room depending on where the player is 
+and what events have been completed. - Dorien*/
+
+void DisplayDescription(string ID)
+{
+
+	if (ID == "Hallway")
+	{
+		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
+	}
+	else if (AlarmOff = false && ID == "Kitchen")
+	{
+		cout << "You're in the kitchen, and from here that damnable alarm is still going off, a little beep coming from...somewhere." << endl << "Type LOOK AROUND to take a general better look of things." << endl;
+	}
+
+	/* So on and so forth for the other rooms.
+	We'll need to revisit this later when we redesign the room movement code,
+	but this'll work for now. - Dorien. */
+}
+
+/* LookAround command: Gives extra general information on the current room. - Dorien */
+
+void LookAround(string ID)
+{
+	if (AlarmOff = false && ID == "Kitchen")
+	{
+		cout << "You finally locate that alarm, and shut it off. Sweet relief! Now you should be able to explore the rest of the house without attracting more of the undead." << endl;
+		AlarmOff = true;
+	}
+}
+
 /* Allows player to input where they would like to go.
 For the demo build, assume all movement is from hallway only. - Dorien */
 
-void playerChoice() 
+void playerChoice(string ID) 
 {
 	cin >> input; 
 
@@ -37,22 +65,22 @@ void playerChoice()
 	if (input == "MOVE NORTH")
 	{
 		cout << "Moving north...";
-		RoomID = "Hallway North";
+		ID == "Hallway North";
 	}
 	else if (input == "MOVE SOUTH")
 	{
 		cout << "Heading south...";
-		RoomID = "Hallway South";
+		ID == "Hallway South";
 	}
 	else if (input == "MOVE EAST")
 	{
 		cout << "Heading east...";
-		RoomID = "Kitchen";
+		ID == "Kitchen";
 	}
 	else if (input == "MOVE WEST")
 	{
 		cout << "Heading west...";
-		RoomID = "Living Room";
+		ID == "Living Room";
 	}
 	else if (input == "RESET")
 	{
@@ -63,7 +91,7 @@ void playerChoice()
 	}
 	else if (input == "LOOK AROUND") 
 	{
-		LookAround(RoomID);
+		LookAround(ID);
 	}
 	else
 	{
@@ -84,30 +112,7 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 	// This shouldn't call playerchoice - playerchoice is going to be called whenever they want to move, backstory only displays once - Dorien
 }
 
-void DisplayDescription(string ID) 
-{ 
-	
-	if (ID == "Hallway") 
-	{
-		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
-	}
-	else if (AlarmOff = false && ID == "Kitchen") 
-	{
-		cout << "You're in the kitchen, and from here that damnable alarm is still going off, a little beep coming from...somewhere." << endl << "Type LOOK AROUND to take a general better look of things." << endl;
-	}
 
-	/* So on and so forth for the other rooms.
-	We'll need to revisit this later when we redesign the room movement code, 
-	but this'll work for now. - Dorien. */
-}
-
-void LookAround(string ID) 
-{
-	if (AlarmOff = false && ID == "Kitchen") 
-	{
-		cout << "You finally locate that alarm, and shut it off. Sweet relief! Now you should be able to explore the rest of the house without attracting more of the undead." << endl;
-	}
-}
 
 
 int main()
@@ -118,11 +123,11 @@ int main()
 	
 	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
-	playerChoice(); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
+	playerChoice(RoomID); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
 
 	DisplayDescription(RoomID); // Move to next area. - Dorien
 
-	playerChoice(); // Call PC again - Dorien
+	playerChoice(RoomID); // Call PC again - Dorien
 
 	return 0; // Exit program successfully.
 }
