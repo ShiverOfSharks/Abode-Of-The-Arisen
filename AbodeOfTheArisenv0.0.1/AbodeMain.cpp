@@ -7,6 +7,9 @@
 #include <string>
 using namespace std;
 string input;
+bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
+string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
+
 
 void playerChoice();
 
@@ -19,7 +22,57 @@ void playerChoice();
 	define functions in main(). And of course, make sure to
 	follow coding standards. - Dorien */
 
-void DisplayBackstory() // displays the opening preamble. Called to first thing in main() - Dorien
+/* Allows player to input where they would like to go.
+For the demo build, assume all movement is from hallway only. - Dorien */
+
+void playerChoice() 
+{
+	cin >> input; 
+
+	/* Player inputs where they want to go. 
+	What I suggest is having the RoomID char variable update depending on where they are,
+	Then have a DisplayDescription function and LookAround function check which
+	room they're in to display the proper description. I did an example for moving into the kitchen. - Dorien */
+
+	if (input == "MOVE NORTH")
+	{
+		cout << "Moving north...";
+		RoomID = "Hallway North";
+	}
+	else if (input == "MOVE SOUTH")
+	{
+		cout << "Heading south...";
+		RoomID = "Hallway South";
+	}
+	else if (input == "MOVE EAST")
+	{
+		cout << "Heading east...";
+		RoomID = "Kitchen";
+	}
+	else if (input == "MOVE WEST")
+	{
+		cout << "Heading west...";
+		RoomID = "Living Room";
+	}
+	else if (input == "RESET")
+	{
+		cout << "Starting over...";
+		//clear screen
+		//clear inventory
+		//reset events
+	}
+	else if (input == "LOOK AROUND") 
+	{
+		LookAround(RoomID);
+	}
+	else
+	{
+		cout << "Invalid input, try again.";
+	}
+
+}
+
+void DisplayBackstory() // Displays the opening preamble. Called to first thing in main() - Dorien
 {
 	cout << "Your name is Anonymous. It's been a scant 5 days since the outbreak began, and life as you knew was turned into a walking nightmare." << endl;
 	cout << "You were unprepared. You didn't have a chance to grab anything from your home in the city before you fled to the countryside, barely avoiding death or infection along the way." << endl;
@@ -28,48 +81,49 @@ void DisplayBackstory() // displays the opening preamble. Called to first thing 
 	cout << "Type LOOK AT to look at more specific points or items of interest. Type PICK UP to grab something, and type STUFF to see your inventory." << endl;
 	cout << "If you ever get stuck, type RESET to give into the zombie hor-er, I mean, reset the game to here." << endl;
 	cout << "You should probably find a way to shut that alarm off...the controls should be in the kitchen to your east." << endl;
-	playerChoice();
+	// This shouldn't call playerchoice - playerchoice is going to be called whenever they want to move, backstory only displays once - Dorien
+}
+
+void DisplayDescription(string ID) 
+{ 
+	
+	if (ID == "Hallway") 
+	{
+		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
+	}
+	else if (AlarmOff = false && ID == "Kitchen") 
+	{
+		cout << "You're in the kitchen, and from here that damnable alarm is still going off, a little beep coming from...somewhere." << endl << "Type LOOK AROUND to take a general better look of things." << endl;
+	}
+
+	/* So on and so forth for the other rooms.
+	We'll need to revisit this later when we redesign the room movement code, 
+	but this'll work for now. - Dorien. */
+}
+
+void LookAround(string ID) 
+{
+	if (AlarmOff = false && ID == "Kitchen") 
+	{
+		cout << "You finally locate that alarm, and shut it off. Sweet relief! Now you should be able to explore the rest of the house without attracting more of the undead." << endl;
+	}
 }
 
 
 int main()
 {
-	/* For now, we shall simply output text to the screen, and call it a day.*/
+
 
 	DisplayBackstory();
+	
+	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
+
+	playerChoice(); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
+
+	DisplayDescription(RoomID); // Move to next area. - Dorien
+
+	playerChoice(); // Call PC again - Dorien
 
 	return 0; // Exit program successfully.
 }
-void playerChoice()
-{
-	cin >> input;
-
-	if (input == "north")
-	{
-		cout << "player moves north";
-	}
-	else if (input == "south")
-	{
-		cout << "player moves south";
-	}
-	else if (input == "east")
-	{
-		cout << "player moves east";
-	}
-	else if (input == "west")
-	{
-		cout << "player moves west";
-	}
-	else if (input == "reset")
-	{
-		cout << "player reset the game";
-		//clear screen
-		//clear inventory
-		//reset events
-	}
-	else
-	{
-		cout << "invalid input, try again";
-	}
-
-}
+// Don't put functions down here - define them above! - Dorien 
