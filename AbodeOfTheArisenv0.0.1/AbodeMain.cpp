@@ -6,7 +6,7 @@
 #include "AbodeHeader.h"
 #include <string>
 using namespace std;
-string input;
+string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
 string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
 
@@ -64,27 +64,27 @@ void playerChoice(string ID)
 
 	if (input == "MOVE NORTH")
 	{
-		cout << "Moving north...";
+		cout << "Moving north..." << endl;
 		ID == "Hallway North";
 	}
 	else if (input == "MOVE SOUTH")
 	{
-		cout << "Heading south...";
+		cout << "Heading south..." << endl;
 		ID == "Hallway South";
 	}
 	else if (input == "MOVE EAST")
 	{
-		cout << "Heading east...";
+		cout << "Heading east..." << endl;
 		ID == "Kitchen";
 	}
 	else if (input == "MOVE WEST")
 	{
-		cout << "Heading west...";
+		cout << "Heading west..." << endl;
 		ID == "Living Room";
 	}
 	else if (input == "RESET")
 	{
-		cout << "Starting over...";
+		cout << "Starting over..." << endl;
 		//clear screen
 		//clear inventory
 		//reset events
@@ -95,7 +95,7 @@ void playerChoice(string ID)
 	}
 	else
 	{
-		cout << "Invalid input, try again.";
+		cout << "Invalid input, try again." << endl;
 	}
 
 }
