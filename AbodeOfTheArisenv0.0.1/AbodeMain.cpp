@@ -53,43 +53,43 @@ void LookAround(string ID)
 /* Allows player to input where they would like to go.
 For the demo build, assume all movement is from hallway only. - Dorien */
 
-void playerChoice(string ID) 
+void playerChoice(string ID, string inp) 
 {
-	cin >> input; 
+	cin >> inp; 
 
 	/* Player inputs where they want to go. 
 	What I suggest is having the RoomID char variable update depending on where they are,
 	Then have a DisplayDescription function and LookAround function check which
 	room they're in to display the proper description. I did an example for moving into the kitchen. - Dorien */
 
-	if (input == "MOVE NORTH")
+	if (inp == "MOVE NORTH")
 	{
 		cout << "Moving north..." << endl;
 		ID == "Hallway North";
 	}
-	else if (input == "MOVE SOUTH")
+	else if (inp == "MOVE SOUTH")
 	{
 		cout << "Heading south..." << endl;
 		ID == "Hallway South";
 	}
-	else if (input == "MOVE EAST")
+	else if (inp == "MOVE EAST")
 	{
 		cout << "Heading east..." << endl;
 		ID == "Kitchen";
 	}
-	else if (input == "MOVE WEST")
+	else if (inp == "MOVE WEST")
 	{
 		cout << "Heading west..." << endl;
 		ID == "Living Room";
 	}
-	else if (input == "RESET")
+	else if (inp == "RESET")
 	{
 		cout << "Starting over..." << endl;
 		//clear screen
 		//clear inventory
 		//reset events
 	}
-	else if (input == "LOOK AROUND") 
+	else if (inp == "LOOK AROUND") 
 	{
 		LookAround(ID);
 	}
@@ -123,11 +123,11 @@ int main()
 	
 	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
-	playerChoice(RoomID); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
+	playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
 
 	DisplayDescription(RoomID); // Move to next area. - Dorien
 
-	playerChoice(RoomID); // Call PC again - Dorien
+	playerChoice(RoomID, input); // Call PC again - Dorien
 
 	return 0; // Exit program successfully.
 }
