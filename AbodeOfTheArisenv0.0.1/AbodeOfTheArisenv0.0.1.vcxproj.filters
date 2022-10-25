@@ -18,9 +18,15 @@
     <ClInclude Include="AbodeHeader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbodeMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

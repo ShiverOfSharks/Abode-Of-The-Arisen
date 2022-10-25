@@ -3,6 +3,7 @@
 
 
 /* Global variable defintions go here. - Dorien */
+#include "Zombie.h"
 #include "AbodeHeader.h"
 #include <string>
 using namespace std;
@@ -53,6 +54,7 @@ void LookAround(string ID)
 /* Allows player to input where they would like to go.
 For the demo build, assume all movement is from hallway only. - Dorien */
 
+/*
 void playerChoice(string ID, string inp) 
 {
 	cin >> inp; 
@@ -61,26 +63,26 @@ void playerChoice(string ID, string inp)
 	What I suggest is having the RoomID char variable update depending on where they are,
 	Then have a DisplayDescription function and LookAround function check which
 	room they're in to display the proper description. I did an example for moving into the kitchen. - Dorien */
-
+/*
 	if (inp == "MOVE NORTH")
 	{
 		cout << "Moving north..." << endl;
-		ID == "Hallway North";
+		ID = "Hallway North";
 	}
 	else if (inp == "MOVE SOUTH")
 	{
 		cout << "Heading south..." << endl;
-		ID == "Hallway South";
+		ID = "Hallway South";
 	}
-	else if (inp == "MOVE EAST")
+	else if (inp = "MOVE EAST")
 	{
 		cout << "Heading east..." << endl;
-		ID == "Kitchen";
+		ID = "Kitchen";
 	}
 	else if (inp == "MOVE WEST")
 	{
 		cout << "Heading west..." << endl;
-		ID == "Living Room";
+		ID = "Living Room";
 	}
 	else if (inp == "RESET")
 	{
@@ -99,7 +101,7 @@ void playerChoice(string ID, string inp)
 	}
 
 }
-
+*/
 void DisplayBackstory() // Displays the opening preamble. Called to first thing in main() - Dorien
 {
 	cout << "Your name is Anonymous. It's been a scant 5 days since the outbreak began, and life as you knew was turned into a walking nightmare." << endl;
@@ -117,7 +119,7 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 
 int main()
 {
-
+	/*
 
 	DisplayBackstory();
 	
@@ -128,6 +130,17 @@ int main()
 	DisplayDescription(RoomID); // Move to next area. - Dorien
 
 	playerChoice(RoomID, input); // Call PC again - Dorien
+	*/
+
+	//Enemy/ Zombie test
+	Enemy theZombie("zombie");
+	theZombie.attack();
+	cout << theZombie.getEnemyName()<<"\n" << theZombie.getEnemyDamage()<<endl;
+
+	Enemy monster2("Ogre",100);
+	monster2.attack();
+	cout << monster2.getEnemyName()<< "\n" << monster2.getEnemyDamage()<<endl;
+
 
 	return 0; // Exit program successfully.
 }
