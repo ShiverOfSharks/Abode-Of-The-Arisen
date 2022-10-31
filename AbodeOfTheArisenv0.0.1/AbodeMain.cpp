@@ -13,8 +13,11 @@ using namespace std;
 
 string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
+bool isStart;
 string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
 vector <string> playerInventory  = {"Item1","Item2","Item3"};
+
+void DisplayBackstory();
 
 //#define Abode[3][3]; // Floor layout. Used to denote where the player is, and as a check for events and possible dialogue. Very integral. - Dorien
 
@@ -45,7 +48,28 @@ void DisplayDescription(string ID)
 	but this'll work for now. - Dorien. */
 }
 
+void showInventory()
+{
 
+}
+
+
+void validateInput(string inp) //while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again
+{
+
+	while (inp != "MOVE NORTH" && inp != "move north"
+		&& inp != "MOVE SOUTH" && inp != "move south"
+		&& inp != "MOVE EAST" && inp != "move east"
+		&& inp != "MOVE SOUTH" && inp != "move south"
+		&& inp != "MOVE WEST" && inp != "move west"
+		&& inp != "RESET" && inp != "reset"
+		&& inp != "LOOK" && inp != "look")
+	{
+		cout << "Please enter a valid input response: \n";
+		getline(cin, inp);
+	}
+
+}
 
 /* LookAround command: Gives extra general information on the current room. - Dorien */
 
@@ -64,43 +88,49 @@ For the demo build, assume all movement is from hallway only. - Dorien */
 
 void playerChoice(string ID, string inp)
 {
-	getline(cin, inp);
+	//cout << endl;
+	cout << "What would you like to do? ";
+	getline(cin, inp); //takes user input
+
+	validateInput(inp); //validates user input
 
 	/* Player inputs where they want to go.
 	What I suggest is having the RoomID char variable update depending on where they are,
 	Then have a DisplayDescription function and LookAround function check which
 	room they're in to display the proper description. I did an example for moving into the kitchen. - Dorien */
 
-	if (inp == "MOVE NORTH")
+	if (inp == "MOVE NORTH" || inp == "move north")
 	{
 		cout << "Moving north..." << endl;
 		ID = "Hallway North";
 	}
-	else if (inp == "MOVE SOUTH")
+	else if (inp == "MOVE SOUTH" || inp == "move south")
 	{
 		cout << "Heading south..." << endl;
 		ID = "Hallway South";
 	}
-	else if (inp == "MOVE EAST")
+	else if (inp == "MOVE EAST" || inp == "move east")
 	{
 		cout << "Heading east..." << endl;
 		ID = "Kitchen";
 	}
-	else if (inp == "MOVE WEST")
+	else if (inp == "MOVE WEST" || inp == "move west")
 	{
 		cout << "Heading west..." << endl;
 		ID = "Living Room";
 	}
-	else if (inp == "RESET")
+	else if (inp == "RESET" || inp == "reset")
 	{
-		//ID = "Start"; //setting the ID to start for now, can be changed later - Doug
 		system("CLS"); //clear screen
 		cout << "Starting over..." << endl;
+		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
+		DisplayBackstory();
+		playerChoice(RoomID, input);
 		
 		//clear inventory
 		//reset events
 	}
-	else if (inp == "LOOK AROUND" || "look around")
+	else if (inp == "LOOK" || inp == "look")
 	{
 		LookAround(ID);
 	}
@@ -129,6 +159,8 @@ int main()
 {
 	
 	DisplayBackstory();
+
+	RoomID = "start"; // RoomID set to start, the user just spawned in at this point - Doug
 	
 	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
