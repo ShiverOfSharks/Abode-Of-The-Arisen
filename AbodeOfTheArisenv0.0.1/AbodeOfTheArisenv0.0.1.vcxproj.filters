@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbodeHeader.h">
+    <ClInclude Include="Zombie.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Zombie.h">
+    <ClInclude Include="Player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -27,6 +30,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Zombie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

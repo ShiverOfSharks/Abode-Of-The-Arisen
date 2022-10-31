@@ -20,5 +20,4 @@ public:
 	int getEnemyDamage();
 };//class Zombie : public Enemy
 
-
 #endif //ENEMY_H

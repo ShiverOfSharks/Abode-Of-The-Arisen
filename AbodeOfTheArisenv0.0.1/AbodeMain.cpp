@@ -2,28 +2,47 @@
 // By Dorien Fields, Douglas Grosch, Geoffery Gin, Dylan De Muth, & Angelique Mueller
 
 
-/* Global variable defintions go here. - Dorien */
+//Imports
 #include "Zombie.h"
-#include "AbodeHeader.h"
+#include "Player.h"
+#include "Room.h"
 #include <stdlib.h>
 #include <vector>
+#include <array>
 #include <string>
 
 using namespace std;
 
+//Global Variables
 string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
 string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
-vector <string> playerInventory  = {"Item1","Item2","Item3"};
+string abode[4][4] = { {"null","null","null","null"},
+					   {"null","null","null","null"},
+					   {"null","null","null","null"},
+					   {"null","null","null","null"},
+					 }; //abode, map of the map and accessable rooms
 
-//#define Abode[3][3]; // Floor layout. Used to denote where the player is, and as a check for events and possible dialogue. Very integral. - Dorien
+//void cout_Abode() incompleate
+void cout_Abode() {//prints abode map, visualized for player
+	for (int i = 0; i < 4; i++) {//forloop iterates through row
 
-// Had to comment out the line of code above because it was causing an error - Doug
+		std::cout << "\n"; //creates a space
 
+		for (int j = 0; j < 4; j++) {//forloop iterates through col
 
-/* Functions go here. Only make calls in main(), please do NOT
-	define functions in main(). And of course, make sure to
-	follow coding standards. - Dorien */
+			std::cout << abode[i][j]; //prints element in array
+			if (j <= 2) std::cout << " | "; //lines of the board
+
+		}//for inner
+
+		if (i <= 2) std::cout << "\n_________________________\n";
+
+	}//for outer
+
+	std::cout << "\n\n\n";
+
+}//void cout_abode
 
 /* Displays a description of the current room depending on where the player is 
 and what events have been completed. - Dorien*/
@@ -127,17 +146,31 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 
 int main()
 {
-	
+
+	system("color 04"); //changes color of console 
+
+
+
 	DisplayBackstory();
 	
 	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
-	playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
+	//playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
 
-	DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
+	//DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
 
 	//playerChoice(RoomID, input); // Call PC again - Dorien
 	
+
+
+	cout_Abode();
+
+	Player dylan("Dylan");
+	dylan.getPlayerInvintory(); //retrival of elements not working
+
+	Room hallway(1);
+	cout<<hallway.getRoomName();
+	hallway.getRoomInvintory(); //retrival of elements not working
 
 	/*//Enemy/ Zombie test
 	Enemy theZombie("zombie");
@@ -151,4 +184,3 @@ int main()
 	*/
 	return 0; // Exit program successfully.
 }
-// Don't put functions down here - define them above! - Dorien 
