@@ -63,7 +63,8 @@ void validateInput(string inp) //while loop accounting for all possible inputs, 
 		&& inp != "MOVE SOUTH" && inp != "move south"
 		&& inp != "MOVE WEST" && inp != "move west"
 		&& inp != "RESET" && inp != "reset"
-		&& inp != "LOOK" && inp != "look")
+		&& inp != "LOOK" && inp != "look"
+		&& inp != "PICK UP" && inp != "pick up")
 	{
 		cout << "Please enter a valid input response: \n";
 		getline(cin, inp);
@@ -83,7 +84,8 @@ void LookAround(string ID)
 }
 
 /* Allows player to input where they would like to go.
-For the demo build, assume all movement is from hallway only. - Dorien */
+Let's go ahead and make sure this works like a well-oiled machine;
+It's the heart of our code! - Dorien */
 
 
 void playerChoice(string ID, string inp)
@@ -93,11 +95,6 @@ void playerChoice(string ID, string inp)
 	getline(cin, inp); //takes user input
 
 	validateInput(inp); //validates user input
-
-	/* Player inputs where they want to go.
-	What I suggest is having the RoomID char variable update depending on where they are,
-	Then have a DisplayDescription function and LookAround function check which
-	room they're in to display the proper description. I did an example for moving into the kitchen. - Dorien */
 
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
@@ -134,7 +131,11 @@ void playerChoice(string ID, string inp)
 	{
 		LookAround(ID);
 	}
-	
+	else if (inp == "PICK UP" || inp == "pick up") // We don't have an item class yet, so 'item' is just a stand in. - Dorien
+	{ 
+		// cout << "You pick up: " << item << endl;
+		// playerInventory += item; 
+	}
 	else
 	{
 		cout << "Invalid input, try again." << endl;
