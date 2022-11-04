@@ -17,11 +17,16 @@ using namespace std;
 string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
 string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
-string abode[4][4] = { {"null","null","null","null"},
-					   {"null","null","null","null"},
-					   {"null","null","null","null"},
-					   {"null","null","null","null"},
+
+
+//change string to "Room" 
+string abode[4][4] = { {"1","2","3","4"},
+					   {"5","6","7","8"},
+					   {"9","10","11","12"},
+					   {"13","14","15","16"},
 					 }; //abode, map of the map and accessable rooms
+
+
 
 //void cout_Abode() incompleate
 void cout_Abode() {//prints abode map, visualized for player
@@ -80,35 +85,46 @@ void LookAround(string ID)
 /* Allows player to input where they would like to go.
 For the demo build, assume all movement is from hallway only. - Dorien */
 
+/*
+void move(string str) {
+	
+	if ("Moving north...")
+		i++;
+	playerPosition[i][j];
 
-void playerChoice(string ID, string inp)
-{
+	
+}
+
+
+
+string playerChoice(string ID, string inp){
+	
 	getline(cin, inp);
 
-	/* Player inputs where they want to go.
-	What I suggest is having the RoomID char variable update depending on where they are,
-	Then have a DisplayDescription function and LookAround function check which
-	room they're in to display the proper description. I did an example for moving into the kitchen. - Dorien */
 
 	if (inp == "MOVE NORTH")
 	{
-		cout << "Moving north..." << endl;
+		
 		ID = "Hallway North";
+		return "Moving north...";
 	}
 	else if (inp == "MOVE SOUTH")
 	{
-		cout << "Heading south..." << endl;
+		
 		ID = "Hallway South";
+		return "Heading south...";
 	}
 	else if (inp == "MOVE EAST")
 	{
-		cout << "Heading east..." << endl;
+		
 		ID = "Kitchen";
+		return "Heading east...";
 	}
 	else if (inp == "MOVE WEST")
 	{
-		cout << "Heading west..." << endl;
+		
 		ID = "Living Room";
+		return "Heading west...";
 	}
 	else if (inp == "RESET")
 	{
@@ -130,6 +146,7 @@ void playerChoice(string ID, string inp)
 	}
 
 }
+*/
 
 void DisplayBackstory() // Displays the opening preamble. Called to first thing in main() - Dorien
 {
@@ -162,15 +179,33 @@ int main()
 	//playerChoice(RoomID, input); // Call PC again - Dorien
 	
 
+	/*
+	do{ //Game Loop
+		
+		//End Game conditions
+		if(){} // At point 16 end game you won, lock room 16 until key is found
+		else if(){} // Player health at 0, "Your Infected"
+		else if(){} // Time out, 5min without input "Your Infected"
+
+		playerChoice(RoomID, input);
+		
+
+	} while ();
+	*/
+
 
 	cout_Abode();
 
+	/*
 	Player dylan("Dylan");
 	dylan.getPlayerInvintory(); //retrival of elements not working
 
 	Room hallway(1);
 	cout<<hallway.getRoomName();
 	hallway.getRoomInvintory(); //retrival of elements not working
+	*/
+
+	//cout<<"The player is in "<<r1.getRoomName();
 
 	/*//Enemy/ Zombie test
 	Enemy theZombie("zombie");
@@ -180,7 +215,9 @@ int main()
 	Enemy monster2("Ogre",100);
 	monster2.attack();
 	cout << monster2.getEnemyName()<< "\n" << monster2.getEnemyDamage()<<endl;
-
 	*/
+
+	
+
 	return 0; // Exit program successfully.
 }
