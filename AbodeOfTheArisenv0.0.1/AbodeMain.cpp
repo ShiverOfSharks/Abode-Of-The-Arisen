@@ -16,7 +16,7 @@ using namespace std;
 //Global Variables
 string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
-string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
+string RoomID = "start"; // Where is the player right now, used for the first input since the player is not able to move north or west right at the beginning
 
 
 //change string to "Room" 
@@ -26,9 +26,7 @@ string abode[4][4] = { {"1","2","3","4"},
 					   {"13","14","15","16"},
 					 }; //abode, map of the map and accessable rooms
 
-
-
-//void cout_Abode() incompleate
+//void cout_Abode() incompleate 
 void cout_Abode() {//prints abode map, visualized for player
 	for (int i = 0; i < 4; i++) {//forloop iterates through row
 
@@ -51,6 +49,46 @@ void cout_Abode() {//prints abode map, visualized for player
 
 /* Displays a description of the current room depending on where the player is 
 and what events have been completed. - Dorien*/
+
+
+//while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again - Doug
+//Added validation off the start - Doug
+void validateInput(string inp) 
+{
+	
+	getline(cin, inp);
+
+	input = inp;
+
+	if (RoomID == "start")
+	{
+		while (inp != "MOVE EAST" && inp != "move east" && inp != "MOVE SOUTH" && inp != "move south")
+		{
+			cout << "You can only move either east or south, try again: ";
+			getline(cin, inp);
+			input = inp;
+			
+		}
+	}
+	else
+	{
+		while (inp != "MOVE NORTH" && inp != "move north"
+			&& inp != "MOVE SOUTH" && inp != "move south"
+			&& inp != "MOVE EAST" && inp != "move east"
+			&& inp != "MOVE SOUTH" && inp != "move south"
+			&& inp != "MOVE WEST" && inp != "move west"
+			&& inp != "RESET" && inp != "reset"
+			&& inp != "LOOK" && inp != "look")
+		{
+			cout << "Please enter a valid input response: \n";
+			getline(cin, inp);
+			input = inp;
+		}
+	}
+
+	
+
+}
 
 void DisplayDescription(string ID)
 {
@@ -94,59 +132,57 @@ void move(string str) {
 
 	
 }
-
+*/
 
 
 string playerChoice(string ID, string inp){
 	
-	getline(cin, inp);
+	validateInput(inp);
 
+	inp = input;
 
-	if (inp == "MOVE NORTH")
+	if (inp == "MOVE NORTH" || inp == "move north")
 	{
-		
-		ID = "Hallway North";
-		return "Moving north...";
+		cout << "Moving north..." << endl;
+		return "Hallway North";
 	}
-	else if (inp == "MOVE SOUTH")
+	else if (inp == "MOVE SOUTH" || inp == "move south")
 	{
-		
-		ID = "Hallway South";
-		return "Heading south...";
+		cout << "Heading south..." << endl;
+		return "Hallway South";
 	}
-	else if (inp == "MOVE EAST")
+	else if (inp == "MOVE EAST" || inp == "move east")
 	{
-		
-		ID = "Kitchen";
-		return "Heading east...";
+		cout << "Heading east..." << endl;
+		return "Kitchen";
 	}
-	else if (inp == "MOVE WEST")
+	else if (inp == "MOVE WEST" || inp == "move west")
 	{
-		
-		ID = "Living Room";
-		return "Heading west...";
+		cout << "Heading west..." << endl;
+		return "Living Room";
 	}
-	else if (inp == "RESET")
+	else if (inp == "RESET" || inp == "reset")
 	{
-		//ID = "Start"; //setting the ID to start for now, can be changed later - Doug
 		system("CLS"); //clear screen
 		cout << "Starting over..." << endl;
-		
+		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
+		playerChoice(RoomID, input);
+
 		//clear inventory
 		//reset events
 	}
-	else if (inp == "LOOK AROUND" || "look around")
+	else if (inp == "LOOK" || inp == "look")
 	{
 		LookAround(ID);
 	}
-	
+
 	else
 	{
 		cout << "Invalid input, try again." << endl;
 	}
 
 }
-*/
+
 
 void DisplayBackstory() // Displays the opening preamble. Called to first thing in main() - Dorien
 {
@@ -166,13 +202,16 @@ int main()
 
 	system("color 04"); //changes color of console 
 
-
-
 	DisplayBackstory();
-	
-	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
-	//playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
+	cout_Abode();
+	
+	/* cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl; 
+	- I commented this out because the player can not move west on the start - Doug*/
+
+	cout << "Choose to move either east or south: ";
+
+	playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
 
 	//DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
 
@@ -194,7 +233,7 @@ int main()
 	*/
 
 
-	cout_Abode();
+	
 
 	/*
 	Player dylan("Dylan");
