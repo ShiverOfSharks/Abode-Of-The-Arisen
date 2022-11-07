@@ -86,8 +86,6 @@ void validateInput(string inp)
 		}
 	}
 
-	
-
 }
 
 void DisplayDescription(string ID)
@@ -144,22 +142,22 @@ string playerChoice(string ID, string inp){
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
 		cout << "Moving north..." << endl;
-		return "Hallway North";
+		return "north";
 	}
 	else if (inp == "MOVE SOUTH" || inp == "move south")
 	{
 		cout << "Heading south..." << endl;
-		return "Hallway South";
+		return "south";
 	}
 	else if (inp == "MOVE EAST" || inp == "move east")
 	{
 		cout << "Heading east..." << endl;
-		return "Kitchen";
+		return "east";
 	}
 	else if (inp == "MOVE WEST" || inp == "move west")
 	{
 		cout << "Heading west..." << endl;
-		return "Living Room";
+		return "west";
 	}
 	else if (inp == "RESET" || inp == "reset")
 	{
@@ -197,6 +195,30 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 	// This shouldn't call playerchoice - playerchoice is going to be called whenever they want to move, backstory only displays once - Dorien
 }
 
+
+
+
+
+
+
+
+
+void zombieAttack() {
+
+	Enemy theZombie("zombie");
+	theZombie.attack();
+	cout << theZombie.getEnemyName() << "\n" << theZombie.getEnemyDamage() << endl;
+
+
+}
+
+
+
+
+
+
+
+
 int main()
 {
 
@@ -209,42 +231,48 @@ int main()
 	/* cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl; 
 	- I commented this out because the player can not move west on the start - Doug*/
 
-	cout << "Choose to move either east or south: ";
-
-	playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
-
+	
 	//DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
 
 	//playerChoice(RoomID, input); // Call PC again - Dorien
 	
 
-	/*
-	do{ //Game Loop
-		
-		//End Game conditions
-		if(){} // At point 16 end game you won, lock room 16 until key is found
-		else if(){} // Player health at 0, "Your Infected"
-		else if(){} // Time out, 5min without input "Your Infected"
-
-		playerChoice(RoomID, input);
-		
-
-	} while ();
-	*/
-
 
 	
-
-	/*
 	Player dylan("Dylan");
+	cout << "////////////////////\n";
 	dylan.getPlayerInvintory(); //retrival of elements not working
+	cout << "////////////////////\n";
+
 
 	Room hallway(1);
 	cout<<hallway.getRoomName();
 	hallway.getRoomInvintory(); //retrival of elements not working
-	*/
+	
 
 	//cout<<"The player is in "<<r1.getRoomName();
+
+
+
+	int count = 0;
+	do{ //Game Loop
+		cout << "loop";
+
+		
+		/*
+		//End Game conditions
+		if(){break;} // At point 16 end game you won, lock room 16 until key is found
+		else if(){break;} // Player health at 0, "Your Infected"
+		else if(){break;} // Time out, 5min without input "Your Infected"
+		*/
+		cout << "What direction would you like to move (North, East, South, West): ";
+		playerChoice(RoomID, input);
+
+	} while (count==10);
+
+	cout << "\n\nbreak\n\n";
+
+	
 
 	/*//Enemy/ Zombie test
 	Enemy theZombie("zombie");

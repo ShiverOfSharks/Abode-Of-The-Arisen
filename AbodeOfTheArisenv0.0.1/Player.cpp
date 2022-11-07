@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Player::Player() {//Default Constructor 
+Player::Player() {//Default Constructor
 	vector<string> playerInvintory = { "player","player","player" };
 	playerName = "The Nameless";
 	playerDamage = 10;
@@ -18,7 +18,7 @@ Player::Player(string name) { //Constructor, name only
 	int playerHealth = 10;
 }
 
-Player::Player(string name, int damage, int health) { //Constructor, name and damage 
+Player::Player(string name, int damage, int health) { //Constructor, name and damage
 	vector<string> playerInvintory = { "player","player","player" };
 	playerName = name;
 	playerDamage = damage;
@@ -46,7 +46,6 @@ void Player::getPlayerInvintory() {
 
 	cout << "\n";
 	for(string temp:playerInvintory) //prints each element in list playerInvintory
-		cout<<temp<< " ";
+		cout<<temp<< " "; 
 	cout << "\n";
-	
 }
