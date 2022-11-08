@@ -12,12 +12,14 @@ private:
 	//Variables
 	int itemDamage;
 	std::string itemName;
+	std::string itemDescription;
 
 public:
 
 	//Methods
 	Item(std::string name);
 	std::string getItemName();
+	std::string getItemDescription();
 
 };//class Player
 
