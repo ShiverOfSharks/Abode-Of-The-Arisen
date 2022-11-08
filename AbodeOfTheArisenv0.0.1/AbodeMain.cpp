@@ -27,6 +27,28 @@ string abode[4][4] = { {"Bed Room","Hallway","Bath Room","Bath Room"},
 					   {"Kitchen","Hallway","Living Room","Living Room"},
 					 }; //abode, map of the map and accessable rooms
 
+// PoC - alternative way to navigating between rooms using similar approach
+//   Define the # of rooms so we can define the room array
+//   Create enums & string names for each room (Important - ToDo error checking, # of rooms MUST be consistent
+//   Initialize room movement array
+// ToDo - initialize room objects here as well - storing in an appropriate structure (possibly vector?)
+#define NUM_ROOMS 3
+enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2};
+string roomStrings[NUM_ROOMS] = {"HALLWAY", "BATHROOM", "BEDROOM"};
+
+struct RoomMap {
+	int roomId;   // unique room identifier
+	int goToNorth;   // North
+	int goToSouth;   // South
+};
+
+RoomMap roomArray[NUM_ROOMS] = { 
+	{HALLWAY, BATHROOM, BEDROOM},  // Current room is Hallway, north goes to bathroom, south to bedroom
+	{BATHROOM, HALLWAY, BEDROOM},  // current room bathroom
+	{BEDROOM, HALLWAY, BATHROOM}   // current room bedroom
+};
+
+
 //void cout_Abode() incompleate 
 void cout_Abode() {//prints abode map, visualized for player
 	for (int i = 0; i < 4; i++) {//forloop iterates through row
@@ -56,7 +78,7 @@ void validateInput(string inp)
 
 	input = inp;
 
-	if (RoomID == "start") //player first spawns and should only move EAST and SOUTH
+	if (RoomID == "removeForNow") //player first spawns and should only move EAST and SOUTH
 	{
 		while (inp != "MOVE EAST" && inp != "move east" && inp != "MOVE SOUTH" && inp != "move south")
 		{
@@ -215,7 +237,8 @@ int main()
 
 
 
-	int count = 10;
+	int count = 1;
+	int roomID = HALLWAY;   // set to starting room
 	do{ //Game Loop
 		cout << "loop";
 
@@ -227,11 +250,20 @@ int main()
 		else if(){break;} // Time out, 5min without input "Your Infected"
 		*/
 		cout << "What direction would you like to move (North, East, South, West): ";
-		playerChoice(RoomID, input);
-		zombieAttack();
+		string move = playerChoice(RoomID, input);
+		// zombieAttack();
 
+		// PoC for room movement
+		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
+		if (move == "north") {
+			roomID = roomArray[roomID].goToNorth;
+		}
+		else if (move == "south") {
+			roomID = roomArray[roomID].goToSouth;
+		}
+		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
-	} while (count==10);
+	} while (count < 10);
 
 	cout << "\n\nbreak\n\n";
 
