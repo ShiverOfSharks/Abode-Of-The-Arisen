@@ -19,7 +19,7 @@ public:
 	Room(int roomId);
 	std::string getRoomName();
 	void getRoomInvintory();
-	void getRoomDescription();
+	string getRoomDescription();
 };//class Room
 
 #endif //ROOM_H

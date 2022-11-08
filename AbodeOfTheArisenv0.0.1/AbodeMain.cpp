@@ -33,7 +33,7 @@ string abode[4][4] = { {"Bed Room","Hallway","Bath Room","Bath Room"},
 //   Initialize room movement array
 // ToDo - initialize room objects here as well - storing in an appropriate structure (possibly vector?)
 #define NUM_ROOMS 3
-enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2};
+enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99};
 string roomStrings[NUM_ROOMS] = {"HALLWAY", "BATHROOM", "BEDROOM"};
 
 struct RoomMap {
