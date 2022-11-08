@@ -27,3 +27,7 @@ void Room::getRoomInvintory() {
 		cout << temp << " ";
 	cout << "\n";
 }
+
+void Room::getRoomDescription(){
+	cout << roomDescription;
+}

@@ -102,18 +102,6 @@ void DisplayDescription(string ID)
 }
 
 
-
-/* LookAround command: Gives extra general information on the current room. - Dorien */
-
-void LookAround(string ID)
-{
-	if (AlarmOff = false && ID == "Kitchen")
-	{
-		cout << "You finally locate that alarm, and shut it off. Sweet relief! Now you should be able to explore the rest of the house without attracting more of the undead." << endl;
-		AlarmOff = true;
-	}
-}
-
 /* Allows player to input where they would like to go.
 For the demo build, assume all movement is from hallway only. - Dorien */
 
@@ -162,12 +150,12 @@ string playerChoice(string ID, string inp){
 		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
 		playerChoice(RoomID, input);
 
-		//clear inventory
 		//reset events
 	}
 	else if (inp == "LOOK" || inp == "look")
 	{
-		LookAround(ID);
+		//"LookAround(ID)" is now "getRoomDescription()"
+		//getRoomDescription();
 	}
 
 	else
@@ -188,7 +176,7 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 	cout << "Type LOOK AT to look at more specific points or items of interest. Type PICK UP to grab something, and type STUFF to see your inventory." << endl;
 	cout << "If you ever get stuck, type RESET to give into the zombie hor-er, I mean, reset the game to here." << endl;
 	cout << "You should probably find a way to shut that alarm off...the controls should be in the kitchen to your east." << endl;
-	// This shouldn't call playerchoice - playerchoice is going to be called whenever they want to move, backstory only displays once - Dorien
+
 }
 
 void zombieAttack() {
@@ -209,15 +197,7 @@ int main()
 
 	cout_Abode();
 	
-	/* cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl; 
-	- I commented this out because the player can not move west on the start - Doug*/
-
-	
-	//DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
-
-	//playerChoice(RoomID, input); // Call PC again - Dorien
-	
-
+	//DisplayDescription(RoomID); // Move to next area
 
 	
 	Player dylan("Dylan");
