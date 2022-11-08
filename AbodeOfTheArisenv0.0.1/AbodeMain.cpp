@@ -6,6 +6,7 @@
 #include "Zombie.h"
 #include "Player.h"
 #include "Room.h"
+#include "Item.h"
 #include <stdlib.h>
 #include <vector>
 #include <array>
@@ -20,10 +21,10 @@ string RoomID = "start"; // Where is the player right now, used for the first in
 
 
 //change string to "Room" 
-string abode[4][4] = { {"1","2","3","4"},
-					   {"5","6","7","8"},
-					   {"9","10","11","12"},
-					   {"13","14","15","16"},
+string abode[4][4] = { {"Bed Room","Hallway","Bath Room","Bath Room"},
+					   {"Bed Room","Hallway","Bath Room","Bath Room"},
+					   {"Kitchen","Hallway","Living Room","Living Room"},
+					   {"Kitchen","Hallway","Living Room","Living Room"},
 					 }; //abode, map of the map and accessable rooms
 
 //void cout_Abode() incompleate 
@@ -39,7 +40,7 @@ void cout_Abode() {//prints abode map, visualized for player
 
 		}//for inner
 
-		if (i <= 2) std::cout << "\n_________________________\n";
+		if (i <= 2) std::cout << "\n_____________________________________________\n";
 
 	}//for outer
 
@@ -47,12 +48,7 @@ void cout_Abode() {//prints abode map, visualized for player
 
 }//void cout_abode
 
-/* Displays a description of the current room depending on where the player is 
-and what events have been completed. - Dorien*/
-
-
 //while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again - Doug
-//Added validation off the start - Doug
 void validateInput(string inp) 
 {
 	
@@ -60,7 +56,7 @@ void validateInput(string inp)
 
 	input = inp;
 
-	if (RoomID == "start")
+	if (RoomID == "start") //player first spawns and should only move EAST and SOUTH
 	{
 		while (inp != "MOVE EAST" && inp != "move east" && inp != "MOVE SOUTH" && inp != "move south")
 		{
@@ -70,7 +66,7 @@ void validateInput(string inp)
 			
 		}
 	}
-	else
+	else //player can move any direction
 	{
 		while (inp != "MOVE NORTH" && inp != "move north"
 			&& inp != "MOVE SOUTH" && inp != "move south"
@@ -195,29 +191,14 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 	// This shouldn't call playerchoice - playerchoice is going to be called whenever they want to move, backstory only displays once - Dorien
 }
 
-
-
-
-
-
-
-
-
 void zombieAttack() {
-
+	cout << "YOU ARE ATTACKED BY A ZOMBIE!!!";
 	Enemy theZombie("zombie");
 	theZombie.attack();
 	cout << theZombie.getEnemyName() << "\n" << theZombie.getEnemyDamage() << endl;
-
+	cout << "\n Would you like to run or fight\n Enter 'run' or 'fight': ";
 
 }
-
-
-
-
-
-
-
 
 int main()
 {
@@ -254,7 +235,7 @@ int main()
 
 
 
-	int count = 0;
+	int count = 10;
 	do{ //Game Loop
 		cout << "loop";
 
@@ -267,6 +248,8 @@ int main()
 		*/
 		cout << "What direction would you like to move (North, East, South, West): ";
 		playerChoice(RoomID, input);
+		zombieAttack();
+
 
 	} while (count==10);
 

@@ -5,17 +5,18 @@
 #include <string>
 #include <list>
 using namespace std;
-class Player { //Player class
+
+class Item { //Player class
 private:
 
 	//Variables
 	int itemDamage;
-	std::string playerName;
+	std::string itemName;
 
 public:
 
 	//Methods
-	Player(std::string name);
+	Item(std::string name);
 	std::string getItemName();
 
 };//class Player

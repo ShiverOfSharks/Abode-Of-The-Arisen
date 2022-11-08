@@ -13,7 +13,7 @@ private:
 	int roomNumber; //Room number identifier, retrieved from array
 	std::string roomName; //This room's name
 public:
-
+	
 	//Methods
 	Room(int roomId);
 	std::string getRoomName();
