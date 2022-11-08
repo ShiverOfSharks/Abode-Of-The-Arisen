@@ -71,12 +71,13 @@ void cout_Abode() {//prints abode map, visualized for player
 }//void cout_abode
 
 //while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again - Doug
-void validateInput(string inp) 
+string validateInput() 
 {
+	string inp;
 	
 	getline(cin, inp);
 
-	input = inp;
+	// input = inp;
 
 	if (RoomID == "removeForNow") //player first spawns and should only move EAST and SOUTH
 	{
@@ -84,7 +85,7 @@ void validateInput(string inp)
 		{
 			cout << "You can only move either east or south, try again: ";
 			getline(cin, inp);
-			input = inp;
+			// input = inp;
 			
 		}
 	}
@@ -100,10 +101,10 @@ void validateInput(string inp)
 		{
 			cout << "Please enter a valid input response: \n";
 			getline(cin, inp);
-			input = inp;
+			// input = inp;
 		}
 	}
-
+	return inp;
 }
 
 void DisplayDescription(string ID)
@@ -141,9 +142,9 @@ void move(string str) {
 
 string playerChoice(string ID, string inp){
 	
-	validateInput(inp);
+	inp = validateInput();
 
-	inp = input;
+	// inp = input;
 
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
@@ -184,6 +185,7 @@ string playerChoice(string ID, string inp){
 	{
 		cout << "Invalid input, try again." << endl;
 	}
+	return "ERROR";
 
 }
 
