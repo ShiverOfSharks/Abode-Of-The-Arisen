@@ -142,7 +142,7 @@ void move(string str) {
 
 string playerChoice(string ID, string inp){
 	
-	inp = validateInput();
+	// inp = validateInput();
 
 	// inp = input;
 
@@ -251,8 +251,16 @@ int main()
 		else if(){break;} // Player health at 0, "Your Infected"
 		else if(){break;} // Time out, 5min without input "Your Infected"
 		*/
+
+		//  Slight rework of console input processing
+		//  Separate out getting player input & validating from
+		//  Parsing the input and returning the command (e.g. north - from MOVE NORTH)
+		//  Note - this separation is required to support automated testing, as otherwise the test code
+		//    will just wait forever
 		cout << "What direction would you like to move (North, East, South, West): ";
-		string move = playerChoice(RoomID, input);
+		string playerInput = validateInput();
+		string move = playerChoice(RoomID, playerInput);
+
 		// zombieAttack();
 
 		// PoC for room movement
