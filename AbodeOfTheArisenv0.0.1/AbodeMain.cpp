@@ -34,18 +34,20 @@ string abode[4][4] = { {"Bed Room","Hallway","Bath Room","Bath Room"},
 // ToDo - initialize room objects here as well - storing in an appropriate structure (possibly vector?)
 #define NUM_ROOMS 3
 enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99};
-string roomStrings[NUM_ROOMS] = {"HALLWAY", "BATHROOM", "BEDROOM"};
+string roomStrings[NUM_ROOMS] = {"Entry Way", "BATHROOM", "BEDROOM"};
 
 struct RoomMap {
 	int roomId;   // unique room identifier
 	int goToNorth;   // North
 	int goToSouth;   // South
+	int goToWest;    //
+	int goToEast;
 };
 
 RoomMap roomArray[NUM_ROOMS] = { 
-	{HALLWAY, BATHROOM, BEDROOM},  // Current room is Hallway, north goes to bathroom, south to bedroom
-	{BATHROOM, HALLWAY, BEDROOM},  // current room bathroom
-	{BEDROOM, HALLWAY, BATHROOM}   // current room bedroom
+	{HALLWAY, BATHROOM, BEDROOM, BATHROOM, HALLWAY},  // Current room is Hallway, north goes to bathroom, south to bedroom
+	{BATHROOM, HALLWAY, BEDROOM, BATHROOM, HALLWAY},  // current room bathroom
+	{BEDROOM, HALLWAY, BATHROOM, BATHROOM, HALLWAY}   // current room bedroom
 };
 
 
@@ -270,6 +272,12 @@ int main()
 		}
 		else if (move == "south") {
 			roomID = roomArray[roomID].goToSouth;
+		}
+		else if (move == "west") {
+			roomID = roomArray[roomID].goToWest;
+		}
+		else if (move == "east") {
+			roomID = roomArray[roomID].goToEast;
 		}
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
