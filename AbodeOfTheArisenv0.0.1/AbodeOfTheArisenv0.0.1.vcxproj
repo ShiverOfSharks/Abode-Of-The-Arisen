@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AllRooms.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbodeMain.cpp" />
+    <ClCompile Include="AllRooms.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
