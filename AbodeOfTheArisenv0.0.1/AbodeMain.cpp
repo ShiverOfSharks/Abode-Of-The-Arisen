@@ -148,6 +148,10 @@ string playerChoice(string ID, string inp){
 
 	// inp = input;
 
+	// get rid of white space
+	// change everything to either upper or lower case
+	// add quit, exit
+
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
 		cout << "Moving north..." << endl;

@@ -27,6 +27,9 @@
     <ClInclude Include="Item.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="RoomMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbodeMain.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
