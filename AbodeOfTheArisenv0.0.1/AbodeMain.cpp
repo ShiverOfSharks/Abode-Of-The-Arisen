@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <string>
+#include <algorithm>   // for transforming string to upper case, ToDo include only the string portion of the library
 
 using namespace std;
 
@@ -88,13 +89,60 @@ Let's go ahead and make sure this works like a well-oiled machine;
 It's the heart of our code! - Dorien */
 
 
-void playerChoice(string ID, string inp)
+string playerChoice(string inp)
 {
 	//cout << endl;
 	cout << "What would you like to do? ";
 	getline(cin, inp); //takes user input
 
-	validateInput(inp); //validates user input
+	// validateInput(inp); //validates user input
+	// Separate user input into a command (e.g. move, look, reset) & a parameter (e.g. north)
+	// string format should be: <whitespace?>command<whitespace>parameter<whitespace/endl>
+
+	// first normalize string to all upper case
+	std::transform(inp.begin(), inp.end(), inp.begin(), ::toupper);
+
+	// then loop through string, first removing whitespace, then 
+	vector <char> command;
+	vector <char> parameter;
+	int i = 0;  // character position in string
+	if (inp.length() <= 2) {    // bad - but quick
+		std::cout << "Invalid entry " << inp << " Please renter ...\n";
+		return NULL;
+	}
+
+	while (isspace(inp[i])) {
+		cout << "inp[i] " << inp[i];
+		i++;
+	}
+	cout << std::endl;
+	while (!isspace(inp[i]) && (inp[i] != '\0')) {
+		cout << "\ti " << i << "  inp[i] " << inp[i];
+		command.push_back(inp[i]);
+		i++;
+	}
+	command.push_back('\0');  // terminate string
+	cout << std::endl;
+	// move past white space, but if end of line - stop  --- note: this breaks if no end of line
+	while (isspace(inp[i]) && (inp[i] != '\0')) {
+		i++;
+	}
+	while (!isspace(inp[i]) && (inp[i] != '\0')) {
+		parameter.push_back(inp[i]);
+		i++;
+	}
+
+	// done - no need to go any further
+	// at this point - command has the command, parameter - if present - has the direction, etc.
+	string commandString(command.begin(), command.end());
+	string parameterString(parameter.begin(), parameter.end());
+
+	cout << "Command " << commandString << std::endl;
+	cout << "Parameter " << parameterString << std::endl << std::endl;  // may not work
+
+	return commandString;
+	/*
+	
 
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
@@ -140,6 +188,7 @@ void playerChoice(string ID, string inp)
 	{
 		cout << "Invalid input, try again." << endl;
 	}
+	*/
 
 }
 
@@ -165,9 +214,9 @@ int main()
 	
 	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
-	playerChoice(RoomID, input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
+	cout << playerChoice(input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
 
-	DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
+	// DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
 
 	//playerChoice(RoomID, input); // Call PC again - Dorien
 	
