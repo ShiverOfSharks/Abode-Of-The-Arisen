@@ -38,7 +38,7 @@ public:
 	int getPlayerPos_X();
 	int getPlayerPos_Y();
 
-	void setPlayerInvintory(string newItem);
+	void addPlayerInvintory(string newItem);
 };//class Player
 
 #endif //PLAYER_H

@@ -143,11 +143,6 @@ void move(string str) {
 
 
 string playerChoice(string ID, string inp){
-	
-	// inp = validateInput();
-
-	// inp = input;
-
 	// get rid of white space
 	// change everything to either upper or lower case
 	// add quit, exit
@@ -186,7 +181,6 @@ string playerChoice(string ID, string inp){
 		//"LookAround(ID)" is now "getRoomDescription()"
 		//getRoomDescription();
 	}
-
 	else
 	{
 		cout << "Invalid input, try again." << endl;
@@ -198,9 +192,10 @@ string playerChoice(string ID, string inp){
 
 void DisplayBackstory(string name) // Displays the opening preamble. Called to first thing in main() - Dorien
 {
-	cout << "Your name is "<<name<<". It's been a scant 5 days since the outbreak began, and life as you knew was turned into a walking nightmare." << endl;
-	cout << "You were unprepared. You didn't have a chance to grab anything from your home in the city before you fled to the countryside, barely avoiding death or infection along the way." << endl;
-	cout << "You found a house in the countryside that looks pretty defensible, but in your hurry, you tripped the security system's alarm, and now the undead close in." << endl;
+	cout << "Your name is "<<name<<". It's been a scant 5 days since the outbreak began, and life as you knew was turned into "
+		 <<"a\n walking nightmare.You were unprepared.You didn't have a chance to grab anything from your home in the city\n "
+		 <<"before you fled to the countryside, barely avoiding death or infection along the way. You found a house in\n the countryside "
+		 <<"that looks pretty defensible, but in your hurry, you tripped the security system's alarm,\n and now the undead close in." << endl;
 	cout << endl; //separate directions from player instructions
 	cout << "You are in a hallway. Type MOVE [Direction] (NORTH, SOUTH, EAST, or WEST) to move in that direction. Type LOOK to have a look at your surroundings." << endl;
 	cout << "Type LOOK AT to look at more specific points or items of interest. Type PICK UP to grab something, and type STUFF to see your inventory." << endl;
@@ -218,23 +213,27 @@ void zombieAttack() {
 
 }
 
+
 int main()
 {
-
-	system("color 04"); //changes color of console 
-
+	system("color 9e"); //changes color of console
 	
 
-	//cout_Abode();
-	
-	//DisplayDescription(RoomID); // Move to next area
 
-	
+	//put player diagnostics in a method so player can call it 
+
+	//Diagnostics for "player" 
 	Player player("Dylan");
-	//player.getPlayerName();
-	//player.getPlayerDamage();
-	//player.getPlayerInvintory(); 
+	cout << "Your name is " << player.getPlayerName()
+		<< "\nYour stats are:\nDamage: " << player.getPlayerDamage()
+		<< "\nHealth is " << player.getPlayerHealth()
+		<< "\nThe items in your invintory: ";
+	player.getPlayerInvintory();
+	
+	cout << "\n\n";
 	DisplayBackstory(player.getPlayerName());
+	cout << "\n";
+
 
 	/*
 	Room hallway(1);
@@ -243,17 +242,24 @@ int main()
 	*/
 
 
-	
-	int roomID = HALLWAY;   // set to starting room
 
+	//Game loop related variables
+	int roomID = HALLWAY;   // set to starting room
 	int count = 0; //checks the iteration of game loop
-	do{ //Game Loop
+
+	//Game Loop
+	do{ 
 		
-		if(count==0)
-		cout << "\n\n\nStart Game\n\n\n";
+		if (count == 0) {
+			cout << "Start Game\n";
+			system("Pause");
+			system("color 04"); //changes color of console 
+		}
 
 		//End Game conditions
-		//if (player.getPlayerHealth()==0) break; // Player health at 0, "Your Infected"
+		if (player.getPlayerHealth() == 0){
+			break; // Player health at 0, "Your Infected"
+		}
 
 		/*
 		if(){break;} // At point 16 end game you won, lock room 16 until key is found
@@ -280,7 +286,15 @@ int main()
 			continue;
 		*/
 
-		// zombieAttack();
+
+
+
+
+
+
+
+
+		// zombieAttack(); //Zombie attacks player, run or fight
 
 		// PoC for room movement
 		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
@@ -299,7 +313,7 @@ int main()
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
 	count++;
-	}while (count <= 2);
+	}while (true);
 
 	cout << "\n\nGAME OVER\nYou made "<<count<<" moves.\n\n\n\n\n";
 	

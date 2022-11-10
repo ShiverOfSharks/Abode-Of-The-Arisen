@@ -1,6 +1,6 @@
 #include "Player.h"
 #include <iostream>
-#include <vector>
+#include <list>
 using namespace std;
 
  //Constructors
@@ -9,7 +9,7 @@ Player::Player() {//Default Constructor
 	playerInvintory = { "player","player","player" };
 	playerName = "The Nameless";
 	setPlayerDamage(10);
-	int playerHealth=10;
+	setPlayerHealth(10);
 
 	int playerPosition_X=0; 
 	int playerPosition_Y=0;  
@@ -19,7 +19,7 @@ Player::Player(string name) { //Constructor, name only
 	playerInvintory = { "player","player","player" };
 	playerName = name;
 	setPlayerDamage(10);
-	int playerHealth = 10;
+	setPlayerHealth(10);
 
 	int playerPosition_X = 0;
 	int playerPosition_Y = 0;
@@ -29,7 +29,7 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 	playerInvintory = { "player","player","player" };
 	playerName = name;
 	setPlayerDamage(damage);
-	playerHealth = health;
+	setPlayerHealth(health);
 
 	int playerPosition_X = 0;
 	int playerPosition_Y = 0;
@@ -60,14 +60,19 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 
 	//Setter Methods
 
+	void Player::setPlayerHealth(int new_playerHealth)
+	{
+		playerHealth=new_playerHealth;
+	}
+
 	void Player::setPlayerDamage(int new_playerDamage) {
 		//cout << "\n\nYou now do " << newDamage << " damage to enemies!\n\n"; //prompt to user
 		playerDamage = new_playerDamage;
 	}
 
 
-	void Player::setPlayerInvintory(string newItem) { //adds element to "playerInvintory" 
-		//playerInvintory.add(newItem);
+	void Player::addPlayerInvintory(string newItem) { //adds element to "playerInvintory" 
+		playerInvintory.push_back(newItem);
 	}
 
 
@@ -90,3 +95,4 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 	int Player::getPlayerPos_Y(){ //returns y position of player in abode array
 		return playerPosition_Y;
 	}
+

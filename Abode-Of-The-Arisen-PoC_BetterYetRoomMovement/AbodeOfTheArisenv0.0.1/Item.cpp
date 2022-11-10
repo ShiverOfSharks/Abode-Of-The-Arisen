@@ -7,9 +7,9 @@ using namespace std;
 
 	//Constructor
 	Item::Item(string name){
-		int itemDamage;
-		string itemName=name;
-		string itemDescription;
+		setItemDamage(10);
+		setItemName(name);
+		setItemDescription("itemDescription");
 	}
 
 
