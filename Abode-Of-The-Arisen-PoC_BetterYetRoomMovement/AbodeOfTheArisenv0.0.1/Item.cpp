@@ -12,7 +12,7 @@ using namespace std;
 		setItemDescription("itemDescription");
 	}
 
-
+	 
 	//Getter Methods
 	int Item::getItemDamage() {
 		return itemDamage;

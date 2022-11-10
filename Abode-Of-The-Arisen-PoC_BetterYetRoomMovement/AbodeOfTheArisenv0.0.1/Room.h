@@ -14,7 +14,7 @@ private:
 	std::string roomName; //This room's name
 	std::string roomDescription; //Text about the room including directions for user
 public:
-	
+	 
 	//Methods
 	Room(int roomId);
 	std::string getRoomName();

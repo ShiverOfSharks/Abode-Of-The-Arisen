@@ -6,7 +6,7 @@ using namespace std;
  //Constructors
 
 Player::Player() {//Default Constructor
-	playerInvintory = { "player","player","player" };
+	playerInvintory;
 	playerName = "The Nameless";
 	setPlayerDamage(10);
 	setPlayerHealth(10);
@@ -16,7 +16,7 @@ Player::Player() {//Default Constructor
 }
 
 Player::Player(string name) { //Constructor, name only
-	playerInvintory = { "player","player","player" };
+	playerInvintory;
 	playerName = name;
 	setPlayerDamage(10);
 	setPlayerHealth(10);
@@ -24,9 +24,9 @@ Player::Player(string name) { //Constructor, name only
 	int playerPosition_X = 0;
 	int playerPosition_Y = 0;
 }
-
+ 
 Player::Player(string name, int damage, int health){ //Constructor, name/damage/health
-	playerInvintory = { "player","player","player" };
+	playerInvintory;
 	playerName = name;
 	setPlayerDamage(damage);
 	setPlayerHealth(health);
@@ -39,8 +39,11 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 
 	void Player::getPlayerInvintory() {
 		cout << "\n";
-		for (string temp : playerInvintory) //prints each element in list playerInvintory
-			cout << temp << " ";
+		if (playerInvintory.size() == 0)
+			cout << "	No Items.";
+		else
+			for (Item temp : playerInvintory) //prints each elements' name string
+				cout << temp.getItemName() << " ";
 		cout << "\n";
 	}
 

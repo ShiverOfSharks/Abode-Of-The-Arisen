@@ -189,7 +189,7 @@ string playerChoice(string ID, string inp){
 
 }
 
-
+ 
 void DisplayBackstory(string name) // Displays the opening preamble. Called to first thing in main() - Dorien
 {
 	cout << "Your name is "<<name<<". It's been a scant 5 days since the outbreak began, and life as you knew was turned into "
@@ -240,6 +240,14 @@ int main()
 	cout<<hallway.getRoomName();
 	hallway.getRoomInvintory();
 	*/
+
+
+	Item TEST_ITEM("The Computer Your Currently Working On");
+	player.addPlayerInvintory(TEST_ITEM.getItemName());
+	player.getPlayerInvintory();
+
+
+
 
 
 

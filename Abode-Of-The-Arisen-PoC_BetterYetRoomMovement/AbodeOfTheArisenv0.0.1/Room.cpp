@@ -34,7 +34,7 @@ Room::Room(int roomId) { //Constructor
 string Room::getRoomName() {
 	return roomName;
 }
-
+ 
 void Room::getRoomInvintory() {
 	cout << "\n";
 	for (auto const& temp : roomItems) //prints each element in list roomItems

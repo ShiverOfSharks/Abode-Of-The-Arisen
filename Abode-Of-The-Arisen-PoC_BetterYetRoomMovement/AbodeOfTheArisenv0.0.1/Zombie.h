@@ -11,7 +11,7 @@ private:
 	int enemyDamage;
 	std::string enemyName;
 public:
-
+	 
 	//Methods
 	Enemy(std::string name);
 	Enemy(std::string name, int damage);

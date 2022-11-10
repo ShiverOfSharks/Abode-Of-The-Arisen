@@ -4,12 +4,13 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include "Item.h" //includes "Item" class objects for list
 using namespace std;
 class Player { //Player class
 private:
 
 	//Variables
-	list<string> playerInvintory;
+	list<Item> playerInvintory;
 	int playerDamage;
 	int playerHealth;
 	std::string playerName;
@@ -21,7 +22,7 @@ public:
 	Player();//default
 	Player(std::string name);
 	Player(std::string name, int damage, int health);
-
+	 
 	std::string getPlayerName();
 	int getPlayerDamage();
 	void getPlayerInvintory();

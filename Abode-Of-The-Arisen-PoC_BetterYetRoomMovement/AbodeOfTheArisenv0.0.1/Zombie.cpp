@@ -11,7 +11,7 @@ public:
 	virtual void attack() = 0;//Pure virtual function, always needs an override
 };//class Enemy
 */
-
+ 
 Enemy::Enemy(string name) {
 	//Enemy( name, int damage)
 	enemyName = name;
