@@ -182,13 +182,35 @@ void DisplayBackstory(string name) // Displays the opening preamble. Called to f
 
 }
 
-void zombieAttack() {
+ //Zombie interaction
+int zombieAttack() {
+	string tempInput;
+	
 	cout << "YOU ARE ATTACKED BY A ZOMBIE!!!";
 	Enemy theZombie("zombie");
 	theZombie.attack();
 	cout << theZombie.getEnemyName() << "\n" << theZombie.getEnemyDamage() << endl;
 	cout << "\n Would you like to run or fight\n Enter 'run' or 'fight': ";
+	cin >> tempInput;
 
+	//logic
+	if (tempInput == "run") {
+		int randomNum = rand() % 4;
+		if (randomNum == 0) return 0;// "return 0" is a place holder until the parser in this code is fixed, reutrn movement when fixed
+		//move north
+		else if (randomNum == 1) return 0;
+		//move east
+		else if (randomNum == 2) return 0;
+		//move south
+		else return 0;
+			//move west
+			return theZombie.getEnemyDamage(); //To be subtracted from player health, posibly lower health over 3 cycles of game loop
+	}//if(tempInput == "run")
+
+	else {
+		//invoke combat method then return calculation
+		return 0;
+	}//else
 }
 
 
