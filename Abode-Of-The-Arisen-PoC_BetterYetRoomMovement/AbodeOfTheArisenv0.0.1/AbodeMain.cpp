@@ -51,7 +51,6 @@ RoomMap roomArray[NUM_ROOMS] = {
 };
 
 
-//void cout_Abode() incompleate 
 void cout_Abode() {//prints abode map, visualized for player
 	for (int i = 0; i < 4; i++) {//forloop iterates through row
 
@@ -78,8 +77,6 @@ string validateInput()
 	string inp;
 	
 	getline(cin, inp);
-
-	// input = inp;
 
 	if (RoomID == "removeForNow") //player first spawns and should only move EAST and SOUTH
 	{
@@ -121,26 +118,7 @@ void DisplayDescription(string ID)
 		cout << "You're in the kitchen, and from here that damnable alarm is still going off, a little beep coming from...somewhere." << endl << "Type LOOK AROUND to take a general better look of things." << endl;
 	}
 
-	/* So on and so forth for the other rooms.
-	We'll need to revisit this later when we redesign the room movement code,
-	but this'll work for now. - Dorien. */
 }
-
-
-/* Allows player to input where they would like to go.
-For the demo build, assume all movement is from hallway only. - Dorien */
-
-/*
-void move(string str) {
-	
-	if ("Moving north...")
-		i++;
-	playerPosition[i][j];
-
-	
-}
-*/
-
 
 string playerChoice(string ID, string inp){
 	// get rid of white space
@@ -192,15 +170,15 @@ string playerChoice(string ID, string inp){
  
 void DisplayBackstory(string name) // Displays the opening preamble. Called to first thing in main() - Dorien
 {
-	cout << "Your name is "<<name<<". It's been a scant 5 days since the outbreak began, and life as you knew was turned into "
-		 <<"a\n walking nightmare.You were unprepared.You didn't have a chance to grab anything from your home in the city\n "
-		 <<"before you fled to the countryside, barely avoiding death or infection along the way. You found a house in\n the countryside "
-		 <<"that looks pretty defensible, but in your hurry, you tripped the security system's alarm,\n and now the undead close in." << endl;
-	cout << endl; //separate directions from player instructions
-	cout << "You are in a hallway. Type MOVE [Direction] (NORTH, SOUTH, EAST, or WEST) to move in that direction. Type LOOK to have a look at your surroundings." << endl;
-	cout << "Type LOOK AT to look at more specific points or items of interest. Type PICK UP to grab something, and type STUFF to see your inventory." << endl;
-	cout << "If you ever get stuck, type RESET to give into the zombie hor-er, I mean, reset the game to here." << endl;
-	cout << "You should probably find a way to shut that alarm off...the controls should be in the kitchen to your east." << endl;
+	cout << "\n\nYour name is "<<name<<". It's been a scant 5 days since the outbreak began, and life as you knew was turned into "
+		 <<"a walking\n nightmare. You were unprepared.You didn't have a chance to grab anything from your home in the city "
+		 <<"before you fled\n to the countryside, barely avoiding death or infection along the way. You found a house in the countryside "
+		 <<"that looks\n pretty defensible, but in your hurry, you tripped the security system's alarm, and now the undead close in." << endl;
+
+	cout << "\n\nYou are in a hallway. Type MOVE [Direction] (NORTH, SOUTH, EAST, or WEST) to move in that direction.\n Type LOOK to have a look at your surroundings."
+		 << "Type PICK UP to grab something, and type STUFF to see your inventory.\n" 
+		 << " If you ever get stuck, type RESET to give into the zombie hor-er, I mean, reset the game to here."
+		 << "You should probably\n find a way to shut that alarm off...the controls should be in the kitchen to your east.\n\n";
 
 }
 
@@ -214,51 +192,43 @@ void zombieAttack() {
 }
 
 
-int main()
-{
+int main(){
+
 	system("color 9e"); //changes color of console
 	
-
+	//Create player object using user input as name, not validated
+	cout << "Name of Survivor: ";
+	string tempName;
+	cin >> tempName;
+	Player player(tempName);
+	system("cls");
 
 	//put player diagnostics in a method so player can call it 
 
 	//Diagnostics for "player" 
-	Player player("Dylan");
 	cout << "Your name is " << player.getPlayerName()
 		<< "\nYour stats are:\nDamage: " << player.getPlayerDamage()
 		<< "\nHealth is " << player.getPlayerHealth()
 		<< "\nThe items in your invintory: ";
 	player.getPlayerInvintory();
-	
-	cout << "\n\n";
-	DisplayBackstory(player.getPlayerName());
-	cout << "\n";
-
 
 	/*
-	Room hallway(1);
-	cout<<hallway.getRoomName();
-	hallway.getRoomInvintory();
-	*/
-
-
+	//"addPlayerInvintory" and "getPlayerInvintory" test, functional
 	Item TEST_ITEM("The Computer Your Currently Working On");
 	player.addPlayerInvintory(TEST_ITEM.getItemName());
 	player.getPlayerInvintory();
-
-
-
-
-
+	*/
 
 	//Game loop related variables
 	int roomID = HALLWAY;   // set to starting room
 	int count = 0; //checks the iteration of game loop
 
+
 	//Game Loop
 	do{ 
 		
 		if (count == 0) {
+			DisplayBackstory(player.getPlayerName());
 			cout << "Start Game\n";
 			system("Pause");
 			system("color 04"); //changes color of console 
@@ -295,13 +265,6 @@ int main()
 		*/
 
 
-
-
-
-
-
-
-
 		// zombieAttack(); //Zombie attacks player, run or fight
 
 		// PoC for room movement
@@ -324,18 +287,7 @@ int main()
 	}while (true);
 
 	cout << "\n\nGAME OVER\nYou made "<<count<<" moves.\n\n\n\n\n";
-	
-	
 
-	/*//Enemy/ Zombie test
-	Enemy theZombie("zombie");
-	theZombie.attack();
-	cout << theZombie.getEnemyName()<<"\n" << theZombie.getEnemyDamage()<<endl;
-
-	Enemy monster2("Ogre",100);
-	monster2.attack();
-	cout << monster2.getEnemyName()<< "\n" << monster2.getEnemyDamage()<<endl;
-	*/
 
 	//looks nicer
 	system("pause"); //pauses console
