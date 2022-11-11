@@ -211,7 +211,7 @@ int zombieAttack() {
 		//invoke combat method then return calculation
 		return 0;
 	}//else
-}
+}//zombieAttack()
 
 
 int main(){
