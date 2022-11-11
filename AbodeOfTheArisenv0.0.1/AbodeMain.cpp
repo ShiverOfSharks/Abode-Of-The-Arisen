@@ -17,7 +17,6 @@ using namespace std;
 //Global Variables
 string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
-string RoomID = "start"; // Where is the player right now, used for the first input since the player is not able to move north or west right at the beginning
 
 
 //change string to "Room" 
@@ -126,10 +125,28 @@ void DisplayDescription(string ID)
 	but this'll work for now. - Dorien. */
 }
 
+void showInventory()
+{
 
-/* Allows player to input where they would like to go.
-For the demo build, assume all movement is from hallway only. - Dorien */
+}
 
+
+void validateInput(string inp) //while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again
+{
+
+	while (inp != "MOVE NORTH" && inp != "move north"
+		&& inp != "MOVE SOUTH" && inp != "move south"
+		&& inp != "MOVE EAST" && inp != "move east"
+		&& inp != "MOVE SOUTH" && inp != "move south"
+		&& inp != "MOVE WEST" && inp != "move west"
+		&& inp != "RESET" && inp != "reset"
+		&& inp != "LOOK" && inp != "look"
+		&& inp != "PICK UP" && inp != "pick up")
+	{
+		cout << "Please enter a valid input response: \n";
+		getline(cin, inp);
+	}
+  
 /*
 void move(string str) {
 	
@@ -142,7 +159,7 @@ void move(string str) {
 */
 
 
-string playerChoice(string ID, string inp){
+// string playerChoice(string ID, string inp){
 	
 	// inp = validateInput();
 
@@ -151,6 +168,7 @@ string playerChoice(string ID, string inp){
 	// get rid of white space
 	// change everything to either upper or lower case
 	// add quit, exit
+
 
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
@@ -177,7 +195,6 @@ string playerChoice(string ID, string inp){
 		system("CLS"); //clear screen
 		cout << "Starting over..." << endl;
 		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
-		playerChoice(RoomID, input);
 
 		//reset events
 	}
@@ -225,7 +242,7 @@ int main()
 
 	DisplayBackstory();
 
-	cout_Abode();
+
 	
 	//DisplayDescription(RoomID); // Move to next area
 
