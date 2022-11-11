@@ -12,8 +12,6 @@ public:
 };//class Enemy
 */
 
-
-
 Enemy::Enemy(string name) {
 	//Enemy( name, int damage)
 	enemyName = name;
