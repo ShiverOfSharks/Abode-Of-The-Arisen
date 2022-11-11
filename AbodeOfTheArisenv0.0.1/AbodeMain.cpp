@@ -26,6 +26,30 @@ string abode[4][4] = { {"Bed Room","Hallway","Bath Room","Bath Room"},
 					   {"Kitchen","Hallway","Living Room","Living Room"},
 					 }; //abode, map of the map and accessable rooms
 
+// PoC - alternative way to navigating between rooms using similar approach
+//   Define the # of rooms so we can define the room array
+//   Create enums & string names for each room (Important - ToDo error checking, # of rooms MUST be consistent
+//   Initialize room movement array
+// ToDo - initialize room objects here as well - storing in an appropriate structure (possibly vector?)
+#define NUM_ROOMS 3
+enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99};
+string roomStrings[NUM_ROOMS] = {"Entry Way", "BATHROOM", "BEDROOM"};
+
+struct RoomMap {
+	int roomId;   // unique room identifier
+	int goToNorth;   // North
+	int goToSouth;   // South
+	int goToWest;    //
+	int goToEast;
+};
+
+RoomMap roomArray[NUM_ROOMS] = { 
+	{HALLWAY, BATHROOM, BEDROOM, BATHROOM, HALLWAY},  // Current room is Hallway, north goes to bathroom, south to bedroom
+	{BATHROOM, HALLWAY, BEDROOM, BATHROOM, HALLWAY},  // current room bathroom
+	{BEDROOM, HALLWAY, BATHROOM, BATHROOM, HALLWAY}   // current room bedroom
+};
+
+
 //void cout_Abode() incompleate 
 void cout_Abode() {//prints abode map, visualized for player
 	for (int i = 0; i < 4; i++) {//forloop iterates through row
@@ -48,20 +72,21 @@ void cout_Abode() {//prints abode map, visualized for player
 }//void cout_abode
 
 //while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again - Doug
-void validateInput(string inp) 
+string validateInput() 
 {
+	string inp;
 	
 	getline(cin, inp);
 
-	input = inp;
+	// input = inp;
 
-	if (RoomID == "start") //player first spawns and should only move EAST and SOUTH
+	if (RoomID == "removeForNow") //player first spawns and should only move EAST and SOUTH
 	{
 		while (inp != "MOVE EAST" && inp != "move east" && inp != "MOVE SOUTH" && inp != "move south")
 		{
 			cout << "You can only move either east or south, try again: ";
 			getline(cin, inp);
-			input = inp;
+			// input = inp;
 			
 		}
 	}
@@ -77,10 +102,10 @@ void validateInput(string inp)
 		{
 			cout << "Please enter a valid input response: \n";
 			getline(cin, inp);
-			input = inp;
+			// input = inp;
 		}
 	}
-
+	return inp;
 }
 
 void DisplayDescription(string ID)
@@ -131,6 +156,18 @@ void move(string str) {
 
 	
 }
+*/
+
+
+// string playerChoice(string ID, string inp){
+	
+	// inp = validateInput();
+
+	// inp = input;
+
+	// get rid of white space
+	// change everything to either upper or lower case
+	// add quit, exit
 
 
 	if (inp == "MOVE NORTH" || inp == "move north")
@@ -171,6 +208,7 @@ void move(string str) {
 	{
 		cout << "Invalid input, try again." << endl;
 	}
+	return "ERROR";
 
 }
 
@@ -224,7 +262,8 @@ int main()
 
 
 
-	int count = 10;
+	int count = 1;
+	int roomID = HALLWAY;   // set to starting room
 	do{ //Game Loop
 		cout << "loop";
 
@@ -235,12 +274,35 @@ int main()
 		else if(){break;} // Player health at 0, "Your Infected"
 		else if(){break;} // Time out, 5min without input "Your Infected"
 		*/
+
+		//  Slight rework of console input processing
+		//  Separate out getting player input & validating from
+		//  Parsing the input and returning the command (e.g. north - from MOVE NORTH)
+		//  Note - this separation is required to support automated testing, as otherwise the test code
+		//    will just wait forever
 		cout << "What direction would you like to move (North, East, South, West): ";
-		playerChoice(RoomID, input);
-		zombieAttack();
+		string playerInput = validateInput();
+		string move = playerChoice(RoomID, playerInput);
 
+		// zombieAttack();
 
-	} while (count==10);
+		// PoC for room movement
+		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
+		if (move == "north") {
+			roomID = roomArray[roomID].goToNorth;
+		}
+		else if (move == "south") {
+			roomID = roomArray[roomID].goToSouth;
+		}
+		else if (move == "west") {
+			roomID = roomArray[roomID].goToWest;
+		}
+		else if (move == "east") {
+			roomID = roomArray[roomID].goToEast;
+		}
+		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
+
+	} while (count < 10);
 
 	cout << "\n\nbreak\n\n";
 

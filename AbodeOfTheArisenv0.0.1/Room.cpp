@@ -3,19 +3,33 @@
 #include <list>
 using namespace std;
 
+// for the moment - make the names match the roomStrings[] defined in main
+// string roomStrings[NUM_ROOMS] = {"HALLWAY", "BATHROOM", "BEDROOM"};
+// enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99};
+
 Room::Room(int roomId) { //Constructor
 	list<string> roomItems = { "room","room","room" };
 	roomNumber = roomId;
-	
-	if (roomNumber == 1 || roomNumber==4)
-		roomName = "Enterence";
-	else if (roomNumber == 2)
-		roomName = "Kitchen";
-	else if (roomNumber == 3)
-		roomName = "Hallway";
-	else
+
+	if (roomNumber == 0) {
+		roomName = "HALLWAY";
+		roomDescription = "HALLWAY";
+	}
+	else if (roomNumber == 1) {
+		roomName = "BATHROOM";
+		roomDescription = "BATHROOM";
+	}
+	else if (roomNumber == 2) {
+		roomName = "BEDROOM";
+		roomDescription = "BEDROOM";
+	}
+	else {
 		roomName = "Somewhere";
+		roomDescription = "Unknown room";
+	}
 }
+
+
 
 string Room::getRoomName() {
 	return roomName;
@@ -28,6 +42,7 @@ void Room::getRoomInvintory() {
 	cout << "\n";
 }
 
-void Room::getRoomDescription(){
-	cout << roomDescription;
+string Room::getRoomDescription(){
+	// cout << roomDescription;
+	return roomDescription;
 }
