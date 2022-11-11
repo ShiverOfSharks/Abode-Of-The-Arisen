@@ -8,7 +8,7 @@ using namespace std;
 // enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99};
 
 Room::Room(int roomId) { //Constructor
-	list<string> roomItems = { "room","room","room" };
+	roomItems;
 	roomNumber = roomId;
 
 	if (roomNumber == 0) {
