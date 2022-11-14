@@ -35,7 +35,7 @@ string Room::getRoomName() {
 	return roomName;
 }
  
-void Room::getRoomInvintory() {
+void Room::getRoomInventory() {
 	cout << "\n";
 	for (auto const& temp : roomItems) //prints each element in list roomItems
 		cout << temp << " ";

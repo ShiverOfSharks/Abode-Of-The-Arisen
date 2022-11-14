@@ -14,9 +14,9 @@
 
 using namespace std;
 
-//Global Variables
+//Global Variables + Event Flags
 string input = "N/A";
-bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
+bool AlarmOff = false; // Event Flag: Did the player turn off the alarm in the kitchen yet? - Dorien
 string RoomID = "start"; // Where is the player right now, used for the first input since the player is not able to move north or west right at the beginning
 
 
@@ -109,13 +109,21 @@ string validateInput()
 void DisplayDescription(string ID)
 {
 
-	if (ID == "Hallway")
+	if (ID == "Entry Way")
 	{
 		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
 	}
 	else if (AlarmOff = false && ID == "Kitchen")
 	{
 		cout << "You're in the kitchen, and from here that damnable alarm is still going off, a little beep coming from...somewhere." << endl << "Type LOOK AROUND to take a general better look of things." << endl;
+	}
+	else if (ID == "BATHROOM") 
+	{
+		cout << "You're in the bathroom. The air in here is cold - it's clearly not been used in a while, and the sink is dry. Maybe there'll be something of use in here later." << endl;
+	}
+	else if (ID == "BEDROOM") 
+	{
+		cout << "This would be the first floor bedroom - this was clearly the master bedroom as well. A large bed, two dressers, and a cabinet across, with TV, connected bathroom, the works. Might be a good place to rest, if not for the clawing arms at the windows and moans behind the walls..." << endl;
 	}
 
 }
@@ -182,6 +190,16 @@ void DisplayBackstory(string name) // Displays the opening preamble. Called to f
 
 }
 
+void Quit() 
+{
+	system("CLS"); //clear screen
+	cout << "Starting over..." << endl;
+	RoomID = "Start";
+	
+	// To close program here or find a way to reiterate to game start? Hmmm... - Dorien
+
+}
+
  //Zombie interaction
 int zombieAttack() {
 	string tempInput;
@@ -212,6 +230,8 @@ int zombieAttack() {
 		return 0;
 	}//else
 }//zombieAttack()
+
+
 
 
 int main(){

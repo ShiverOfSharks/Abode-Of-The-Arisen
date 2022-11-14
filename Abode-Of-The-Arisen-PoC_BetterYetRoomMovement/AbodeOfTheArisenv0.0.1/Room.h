@@ -18,7 +18,7 @@ public:
 	//Methods
 	Room(int roomId);
 	std::string getRoomName();
-	void getRoomInvintory();
+	void getRoomInventory();
 	string getRoomDescription();
 };//class Room
 
