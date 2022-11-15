@@ -16,7 +16,7 @@ string input = "N/A";
 bool AlarmOff = false; // Did the player turn off the alarm in the kitchen yet? - Dorien
 bool isStart;
 string RoomID = "Hallway"; // Where is the player right now - will adjust to something less hard-code later - Dorien 
-vector <string> playerInventory  = {"Item1","Item2","Item3"};
+vector <string> playerInventory = { "Item1","Item2","Item3" };
 
 void DisplayBackstory();
 
@@ -29,8 +29,8 @@ void DisplayBackstory();
 	define functions in main(). And of course, make sure to
 	follow coding standards. - Dorien */
 
-/* Displays a description of the current room depending on where the player is 
-and what events have been completed. - Dorien*/
+	/* Displays a description of the current room depending on where the player is
+	and what events have been completed. - Dorien*/
 
 void DisplayDescription(string ID)
 {
@@ -142,7 +142,7 @@ string playerChoice(string inp)
 
 	return commandString;
 	/*
-	
+
 
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
@@ -171,7 +171,7 @@ string playerChoice(string inp)
 		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
 		DisplayBackstory();
 		playerChoice(RoomID, input);
-		
+
 		//clear inventory
 		//reset events
 	}
@@ -180,9 +180,9 @@ string playerChoice(string inp)
 		LookAround(ID);
 	}
 	else if (inp == "PICK UP" || inp == "pick up") // We don't have an item class yet, so 'item' is just a stand in. - Dorien
-	{ 
+	{
 		// cout << "You pick up: " << item << endl;
-		// playerInventory += item; 
+		// playerInventory += item;
 	}
 	else
 	{
@@ -207,11 +207,11 @@ void DisplayBackstory() // Displays the opening preamble. Called to first thing 
 
 int main()
 {
-	
+
 	DisplayBackstory();
 
 	RoomID = "start"; // RoomID set to start, the user just spawned in at this point - Doug
-	
+
 	cout << "Head to the kitchen by putting in MOVE WEST. You can move to the other rooms later by putting in MOVE and the other three cardinal directions." << endl;
 
 	cout << playerChoice(input); // Call player choice and update room ID if needed, to then display the correct description. - Dorien
@@ -219,7 +219,7 @@ int main()
 	// DisplayDescription(RoomID); // Move to next area. - Dorien //this function is writing to the console after the player resets the game - Doug
 
 	//playerChoice(RoomID, input); // Call PC again - Dorien
-	
+
 
 	/*//Enemy/ Zombie test
 	Enemy theZombie("zombie");
