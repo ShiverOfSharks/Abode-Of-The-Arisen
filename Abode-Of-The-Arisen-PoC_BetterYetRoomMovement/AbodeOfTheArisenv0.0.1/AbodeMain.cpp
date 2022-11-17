@@ -195,8 +195,11 @@ void Quit()
 	system("CLS"); //clear screen
 	cout << "Starting over..." << endl;
 	RoomID = "Start";
+
+	exit(0);
 	
 	// To close program here or find a way to reiterate to game start? Hmmm... - Dorien
+	// Setting to close program for now - something less permanent may be in Sprint 4. 
 
 }
 
