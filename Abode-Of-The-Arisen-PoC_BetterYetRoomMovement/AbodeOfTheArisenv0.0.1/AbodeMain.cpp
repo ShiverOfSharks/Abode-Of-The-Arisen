@@ -320,35 +320,42 @@ int main(){
 			roomID = roomArray[roomID].goToNorth;
 			Room newRoom(roomID);
 			cout<<"\n\n"<<newRoom.getRoomDescription()<<"\n\n";
-			newRoom.getRoomInventory();
+			newRoom.printRoomInventory();
 		}
 		else if (move == "south") {
 			roomID = roomArray[roomID].goToSouth;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
-			newRoom.getRoomInventory();
+			newRoom.printRoomInventory();
 		}
 		else if (move == "west") {
 			roomID = roomArray[roomID].goToWest;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
-			newRoom.getRoomInventory();
+			newRoom.printRoomInventory();
 		}
 		else if (move == "east") {
 			roomID = roomArray[roomID].goToEast;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
-			newRoom.getRoomInventory();
+			newRoom.printRoomInventory();
 		}
+		//CURRENTLY NOT FUNCTIONAL
 		//user interactions
 		else if (move == "quit") {
 			break;
 		}
-
+		else if (move == "pick up") {
+			Room newRoom(roomID); //creates new room, find better way of accessing room
+			player.addPlayerInvintory(newRoom.getRoomInventory()); //gets first item from the room invintory then adds that item to the player invintory
+		}
 
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
+		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
 		if (count == 4) break; //ends loop after 4 inputs because can not quit from user input
+		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
+
 
 	count++; //itterates the loop count
 	}while (true);

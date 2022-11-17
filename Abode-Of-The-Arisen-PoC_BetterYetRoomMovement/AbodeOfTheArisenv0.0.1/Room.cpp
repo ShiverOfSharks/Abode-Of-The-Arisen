@@ -46,13 +46,12 @@ Room::Room(int roomId) { //Constructor
 	}
 }
 
-
-
 string Room::getRoomName() {
 	return roomName;
 }
  
-void Room::getRoomInventory() {
+//Room Invintory
+void Room::printRoomInventory() {
 	int count = 0; //flag for number of times loop runs
 
 	cout << "\n";
@@ -68,10 +67,18 @@ void Room::getRoomInventory() {
 	cout << "\n";
 }
 
-string Room::getRoomDescription(){
-	return roomDescription;
+Item Room::getRoomInventory() {
+
+	return roomItems.front(); //takes first item in roomItems list and return/ removes it
+
 }
 
 void Room::addRoomInvintory(Item newItem) { //adds element to "roomItems" 
 	roomItems.push_back(newItem);
+}
+
+
+//Room Description
+string Room::getRoomDescription(){
+	return roomDescription;
 }

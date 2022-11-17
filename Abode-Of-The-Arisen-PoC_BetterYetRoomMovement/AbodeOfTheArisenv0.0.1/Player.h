@@ -33,7 +33,7 @@ public:
 	//Interation Mehtods
 	void attack();
 
-	void addPlayerInvintory(string newItem);
+	void addPlayerInvintory(Item newItem);
 	void printPlayerStats();
 };//class Player
 

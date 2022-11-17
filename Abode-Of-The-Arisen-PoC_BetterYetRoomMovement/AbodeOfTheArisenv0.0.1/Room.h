@@ -19,9 +19,10 @@ public:
 	//Methods
 	Room(int roomId);
 	std::string getRoomName();
-	void getRoomInventory();
+	void printRoomInventory();
 	string getRoomDescription();
 	void addRoomInvintory(Item newItem);
+	Item getRoomInventory();
 };//class Room
 
 #endif //ROOM_H

@@ -65,7 +65,7 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 	}
 
 
-	void Player::addPlayerInvintory(string newItem) { //adds element to "playerInvintory" 
+	void Player::addPlayerInvintory(Item newItem) { //adds element to "playerInvintory" 
 		playerInvintory.push_back(newItem);
 	}
 
