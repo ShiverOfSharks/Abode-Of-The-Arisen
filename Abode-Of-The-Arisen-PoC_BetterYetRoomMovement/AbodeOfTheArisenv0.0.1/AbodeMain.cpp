@@ -247,11 +247,13 @@ int main(){
 	//put player diagnostics in a method so player can call it 
 
 	//Diagnostics for "player" 
+	/*
 	cout << "Your name is " << player.getPlayerName()
 		<< "\nYour stats are:\nDamage: " << player.getPlayerDamage()
 		<< "\nHealth is " << player.getPlayerHealth()
 		<< "\nThe items in your invintory: ";
 	player.getPlayerInvintory();
+	*/
 
 	/*
 	//"addPlayerInvintory" and "getPlayerInvintory" test, functional
@@ -267,11 +269,13 @@ int main(){
 
 	//Game Loop
 	do{ 
+
 		
 		if (count == 0) {
-			DisplayBackstory(player.getPlayerName());
-			cout << "Start Game\n";
-			system("Pause");
+			player.printPlayerStats(); //Diagnostics for "player" 
+			DisplayBackstory(player.getPlayerName()); //prints backstory with player's name inserted into it
+			cout << "Start Game\n"; //prompts user that game has started
+			system("Pause"); //pauses system till player is ready to start game
 			system("color 04"); //changes color of console 
 		}
 
@@ -348,9 +352,11 @@ int main(){
 
 	count++; //itterates the loop count
 	}while (true);
-
-	cout << "\n\nGAME OVER\nYou made "<<count<<" moves.\n\n\n\n\n";
-
+	
+	//Ending Prompts to user
+	cout << "\n\n\t   GAME OVER\n";
+	if (player.getPlayerHealth() != 0) cout << "\tYou Survived!!!\n"; //player "survives" if the game ends and their health is not 0
+	cout << "\tYou made " << count << " moves.\n\n";
 
 	//looks nicer
 	system("pause"); //pauses console

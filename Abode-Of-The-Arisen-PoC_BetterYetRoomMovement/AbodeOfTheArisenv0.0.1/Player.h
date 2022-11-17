@@ -34,6 +34,7 @@ public:
 	void attack();
 
 	void addPlayerInvintory(string newItem);
+	void printPlayerStats();
 };//class Player
 
 #endif //PLAYER_H
