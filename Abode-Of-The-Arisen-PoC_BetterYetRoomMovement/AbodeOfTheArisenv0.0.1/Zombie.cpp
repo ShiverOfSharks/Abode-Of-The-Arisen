@@ -13,7 +13,7 @@ public:
 */
  
 Enemy::Enemy(string name) {
-	//Enemy( name, int damage)
+	//Enemy(name, int damage)
 	setEnemyName(name);
 	setEnemyDamage(10);
 }

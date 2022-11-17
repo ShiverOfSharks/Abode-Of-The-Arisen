@@ -20,6 +20,7 @@ public:
 	std::string getRoomName();
 	void getRoomInventory();
 	string getRoomDescription();
+	void addRoomInvintory(string newItem);
 };//class Room
 
 #endif //ROOM_H

@@ -316,21 +316,25 @@ int main(){
 			roomID = roomArray[roomID].goToNorth;
 			Room newRoom(roomID);
 			cout<<"\n\n"<<newRoom.getRoomDescription()<<"\n\n";
+			newRoom.getRoomInventory();
 		}
 		else if (move == "south") {
 			roomID = roomArray[roomID].goToSouth;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
+			newRoom.getRoomInventory();
 		}
 		else if (move == "west") {
 			roomID = roomArray[roomID].goToWest;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
+			newRoom.getRoomInventory();
 		}
 		else if (move == "east") {
 			roomID = roomArray[roomID].goToEast;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
+			newRoom.getRoomInventory();
 		}
 		//user interactions
 		else if (move == "quit") {

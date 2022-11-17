@@ -41,6 +41,9 @@ string Room::getRoomName() {
  
 void Room::getRoomInventory() {
 	cout << "\n";
+	if (roomItems.size() == 0)
+		cout << "	No Items.";
+	else
 	for (auto const& temp : roomItems) //prints each element in list roomItems
 		cout << temp << " ";
 	cout << "\n";
@@ -48,4 +51,8 @@ void Room::getRoomInventory() {
 
 string Room::getRoomDescription(){
 	return roomDescription;
+}
+
+void Room::addRoomInvintory(string newItem) { //adds element to "roomItems" 
+	roomItems.push_back(newItem);
 }
