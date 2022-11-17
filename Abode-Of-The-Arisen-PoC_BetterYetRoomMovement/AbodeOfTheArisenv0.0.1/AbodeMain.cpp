@@ -349,7 +349,7 @@ int main(){
 			Room newRoom(roomID); //creates new room, find better way of accessing room
 			player.addPlayerInvintory(newRoom.getRoomInventory()); //gets first item from the room invintory then adds that item to the player invintory
 		}
-
+		 
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
 		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
