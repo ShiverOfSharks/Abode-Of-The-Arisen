@@ -189,15 +189,6 @@ void DisplayBackstory(string name) // Displays the opening preamble. Called to f
 
 }
 
-void Quit() 
-{
-	system("CLS"); //clear screen
-	cout << "Starting over..." << endl;
-	RoomID = "Start";
-	
-	// To close program here or find a way to reiterate to game start? Hmmm... - Dorien
-
-}
 
  //Zombie interaction
 int zombieAttack() {
@@ -241,26 +232,9 @@ int main(){
 	cout << "Name of Survivor: ";
 	string tempName;
 	cin >> tempName;
-	Player player(tempName);
+	Player player(tempName); //creates object with name input from user
 	system("cls");
 
-	//put player diagnostics in a method so player can call it 
-
-	//Diagnostics for "player" 
-	/*
-	cout << "Your name is " << player.getPlayerName()
-		<< "\nYour stats are:\nDamage: " << player.getPlayerDamage()
-		<< "\nHealth is " << player.getPlayerHealth()
-		<< "\nThe items in your invintory: ";
-	player.getPlayerInvintory();
-	*/
-
-	/*
-	//"addPlayerInvintory" and "getPlayerInvintory" test, functional
-	Item TEST_ITEM("The Computer Your Currently Working On");
-	player.addPlayerInvintory(TEST_ITEM.getItemName());
-	player.getPlayerInvintory();
-	*/
 
 	//Game loop related variables
 	int roomID = HALLWAY;   // set to starting room
@@ -301,17 +275,6 @@ int main(){
 		string move = playerChoice(RoomID, playerInput);
 
 
-		/*
-		//NOTE: intagrate interations into "playerInput"
-		//Interaticions besides moving
-		//cout<< "Would you like to do something(y/n): ";
-		if (cin)
-			interact()
-		else
-			continue;
-		*/
-
-
 		// zombieAttack(); //Zombie attacks player, run or fight
 
 		// PoC for room movement
@@ -340,7 +303,7 @@ int main(){
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 			newRoom.printRoomInventory();
 		}
-		//CURRENTLY NOT FUNCTIONAL
+		//CURRENTLY NOT FUNCTIONAL DUE TO INPUT ISSUES
 		//user interactions
 		else if (move == "quit") {
 			break;
