@@ -344,7 +344,9 @@ int main(){
 
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
-	count++;
+		if (count == 4) break; //ends loop after 4 inputs because can not quit from user input
+
+	count++; //itterates the loop count
 	}while (true);
 
 	cout << "\n\nGAME OVER\nYou made "<<count<<" moves.\n\n\n\n\n";
