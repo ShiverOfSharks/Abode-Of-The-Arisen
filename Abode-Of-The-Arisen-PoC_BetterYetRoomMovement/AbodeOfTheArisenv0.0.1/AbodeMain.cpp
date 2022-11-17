@@ -162,10 +162,9 @@ string playerChoice(string ID, string inp){
 
 		//reset events
 	}
-	else if (inp == "LOOK" || inp == "look")
+	else if (inp == "quit") //fixing quit function 
 	{
-		//"LookAround(ID)" is now "getRoomDescription()"
-		//getRoomDescription();
+		return "quit";
 	}
 	else
 	{
@@ -292,7 +291,9 @@ int main(){
 		//  Note - this separation is required to support automated testing, as otherwise the test code
 		//    will just wait forever
 		cout << "What direction would you like to move (North, East, South, West): ";
+
 		string playerInput = validateInput();
+
 		string move = playerChoice(RoomID, playerInput);
 
 
@@ -313,16 +314,30 @@ int main(){
 		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
 		if (move == "north") {
 			roomID = roomArray[roomID].goToNorth;
+			Room newRoom(roomID);
+			cout<<"\n\n"<<newRoom.getRoomDescription()<<"\n\n";
 		}
 		else if (move == "south") {
 			roomID = roomArray[roomID].goToSouth;
+			Room newRoom(roomID);
+			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 		}
 		else if (move == "west") {
 			roomID = roomArray[roomID].goToWest;
+			Room newRoom(roomID);
+			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 		}
 		else if (move == "east") {
 			roomID = roomArray[roomID].goToEast;
+			Room newRoom(roomID);
+			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 		}
+		//user interactions
+		else if (move == "quit") {
+			break;
+		}
+
+
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
 	count++;
