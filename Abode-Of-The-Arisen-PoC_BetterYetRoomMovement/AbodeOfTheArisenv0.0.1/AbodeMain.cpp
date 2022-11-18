@@ -162,10 +162,9 @@ string playerChoice(string ID, string inp){
 
 		//reset events
 	}
-	else if (inp == "LOOK" || inp == "look")
+	else if (inp == "quit") //fixing quit function 
 	{
-		//"LookAround(ID)" is now "getRoomDescription()"
-		//getRoomDescription();
+		return "quit";
 	}
 	else
 	{
@@ -190,18 +189,6 @@ void DisplayBackstory(string name) // Displays the opening preamble. Called to f
 
 }
 
-void Quit() 
-{
-	system("CLS"); //clear screen
-	cout << "Starting over..." << endl;
-	RoomID = "Start";
-
-	exit(0);
-	
-	// To close program here or find a way to reiterate to game start? Hmmm... - Dorien
-	// Setting to close program for now - something less permanent may be in Sprint 4. 
-
-}
 
  //Zombie interaction
 int zombieAttack() {
@@ -245,24 +232,9 @@ int main(){
 	cout << "Name of Survivor: ";
 	string tempName;
 	cin >> tempName;
-	Player player(tempName);
+	Player player(tempName); //creates object with name input from user
 	system("cls");
 
-	//put player diagnostics in a method so player can call it 
-
-	//Diagnostics for "player" 
-	cout << "Your name is " << player.getPlayerName()
-		<< "\nYour stats are:\nDamage: " << player.getPlayerDamage()
-		<< "\nHealth is " << player.getPlayerHealth()
-		<< "\nThe items in your invintory: ";
-	player.getPlayerInvintory();
-
-	/*
-	//"addPlayerInvintory" and "getPlayerInvintory" test, functional
-	Item TEST_ITEM("The Computer Your Currently Working On");
-	player.addPlayerInvintory(TEST_ITEM.getItemName());
-	player.getPlayerInvintory();
-	*/
 
 	//Game loop related variables
 	int roomID = HALLWAY;   // set to starting room
@@ -271,11 +243,13 @@ int main(){
 
 	//Game Loop
 	do{ 
+
 		
 		if (count == 0) {
-			DisplayBackstory(player.getPlayerName());
-			cout << "Start Game\n";
-			system("Pause");
+			player.printPlayerStats(); //Diagnostics for "player" 
+			DisplayBackstory(player.getPlayerName()); //prints backstory with player's name inserted into it
+			cout << "Start Game\n"; //prompts user that game has started
+			system("Pause"); //pauses system till player is ready to start game
 			system("color 04"); //changes color of console 
 		}
 
@@ -295,19 +269,10 @@ int main(){
 		//  Note - this separation is required to support automated testing, as otherwise the test code
 		//    will just wait forever
 		cout << "What direction would you like to move (North, East, South, West): ";
+
 		string playerInput = validateInput();
+
 		string move = playerChoice(RoomID, playerInput);
-
-
-		/*
-		//NOTE: intagrate interations into "playerInput"
-		//Interaticions besides moving
-		//cout<< "Would you like to do something(y/n): ";
-		if (cin)
-			interact()
-		else
-			continue;
-		*/
 
 
 		// zombieAttack(); //Zombie attacks player, run or fight
@@ -316,23 +281,52 @@ int main(){
 		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
 		if (move == "north") {
 			roomID = roomArray[roomID].goToNorth;
+			Room newRoom(roomID);
+			cout<<"\n\n"<<newRoom.getRoomDescription()<<"\n\n";
+			newRoom.printRoomInventory();
 		}
 		else if (move == "south") {
 			roomID = roomArray[roomID].goToSouth;
+			Room newRoom(roomID);
+			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
+			newRoom.printRoomInventory();
 		}
 		else if (move == "west") {
 			roomID = roomArray[roomID].goToWest;
+			Room newRoom(roomID);
+			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
+			newRoom.printRoomInventory();
 		}
 		else if (move == "east") {
 			roomID = roomArray[roomID].goToEast;
+			Room newRoom(roomID);
+			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
+			newRoom.printRoomInventory();
 		}
+		//CURRENTLY NOT FUNCTIONAL DUE TO INPUT ISSUES
+		//user interactions
+		else if (move == "quit") {
+			break;
+		}
+		else if (move == "pick up") {
+			Room newRoom(roomID); //creates new room, find better way of accessing room
+			player.addPlayerInvintory(newRoom.getRoomInventory()); //gets first item from the room invintory then adds that item to the player invintory
+		}
+		 
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
-	count++;
+		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
+		if (count == 4) break; //ends loop after 4 inputs because can not quit from user input
+		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
+
+
+	count++; //itterates the loop count
 	}while (true);
-
-	cout << "\n\nGAME OVER\nYou made "<<count<<" moves.\n\n\n\n\n";
-
+	
+	//Ending Prompts to user
+	cout << "\n\n\t   GAME OVER\n";
+	if (player.getPlayerHealth() != 0) cout << "\tYou Survived!!!\n"; //player "survives" if the game ends and their health is not 0
+	cout << "\tYou made " << count << " moves.\n\n";
 
 	//looks nicer
 	system("pause"); //pauses console

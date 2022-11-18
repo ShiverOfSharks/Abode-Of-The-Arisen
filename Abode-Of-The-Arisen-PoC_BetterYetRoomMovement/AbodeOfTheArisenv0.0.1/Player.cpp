@@ -65,7 +65,7 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 	}
 
 
-	void Player::addPlayerInvintory(string newItem) { //adds element to "playerInvintory" 
+	void Player::addPlayerInvintory(Item newItem) { //adds element to "playerInvintory" 
 		playerInvintory.push_back(newItem);
 	}
 
@@ -74,5 +74,14 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 
 
 	//Interaction Methods
+	void Player::printPlayerStats(){ //couts player related information
+	
+		cout << "Your name is " << getPlayerName()
+			<< "\nYour stats are:\nDamage: " << getPlayerDamage()
+			<< "\nHealth is " << getPlayerHealth()
+			<< "\nThe items in your invintory: ";
+		getPlayerInvintory();
+	
+	}
 
 	void Player::attack() {}
