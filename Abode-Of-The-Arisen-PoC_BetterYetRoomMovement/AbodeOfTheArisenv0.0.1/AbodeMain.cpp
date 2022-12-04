@@ -13,7 +13,6 @@
 #include <string>
 #include <algorithm> 
 
-using namespace std;
 
 //Global Variables + Event Flags
 string input = "N/A";
@@ -73,13 +72,10 @@ void cout_Abode() {//prints abode map, visualized for player
 }//void cout_abode
 
 //while loop accounting for all possible inputs, and if the user types anything else, the program will prompt the user to enter again - Doug
-string validateInput() 
+string validateInput(string inp) 
 {
-	string inp;
-	
-	getline(cin, inp);
 
-	if (RoomID == "removeForNow") //player first spawns and should only move EAST and SOUTH
+	if (RoomID == "DefunctForNow") //player first spawns and should only move EAST and SOUTH
 	{
 		while (inp != "MOVE EAST" && inp != "move east" && inp != "MOVE SOUTH" && inp != "move south")
 		{
@@ -131,8 +127,9 @@ void DisplayDescription(string ID)
 
 // Professor Vallone's Parser being inplemented. - Dorien
 
-string playerChoice(string inp)
+string playerChoice()
 {
+	string inp;
 	//cout << endl;
 	cout << "What would you like to do? ";
 	getline(cin, inp); //takes user input
@@ -182,7 +179,42 @@ string playerChoice(string inp)
 	cout << "Command " << commandString << std::endl;
 	cout << "Parameter " << parameterString << std::endl;  // may not work
 
-	return commandString;
+	/* Proposed implementation - use nested if for movement, calling validateinput() to check before returning parameter string
+	(as current room movement works on parameter, not command) - Dorien */
+
+	if (commandString == "MOVE")  // ParameterString is the direction, so when it's called in main, that's what move needs to be for the code to work properly. - Dorien
+	{
+		validateInput(inp);
+		if (parameterString == "WEST") 
+		{
+			return parameterString;
+		}
+		else if (parameterString == "EAST")
+		{
+			return parameterString;
+		}
+		else if (parameterString == "NORTH")
+		{
+			return parameterString; 
+		}
+		else if (parameterString == "SOUTH")
+		{
+			return parameterString;
+		}
+	}
+	else if (commandString == "RESET") 
+	{
+		validateInput(inp);
+		// Reset the game. Deferring this to later. - Dorien
+		return "Game reset! Close the window now.";
+	}
+	else if (commandString == "LOOK") 
+	{
+		DisplayDescription(RoomID);
+	}
+
+	return "Something has gone wrong - this was supposed to output parameterString and proc movement.";
+	
 	/*
 	if (inp == "MOVE NORTH" || inp == "move north")
 	{
@@ -359,7 +391,7 @@ int main(){
 
 		//End Game conditions
 		if (player.getPlayerHealth() == 0){
-			break; // Player health at 0, "Your Infected"
+			break; // Player health at 0, "You're Infected"
 		}
 
 		/*
@@ -374,15 +406,14 @@ int main(){
 		//    will just wait forever
 		cout << "What direction would you like to move (North, East, South, West): ";
 
-		string playerInput = validateInput();
-
-		string move = playerChoice(RoomID);
+		string move = playerChoice();
 
 
 		// zombieAttack(); //Zombie attacks player, run or fight
 
 		// PoC for room movement
 		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
+		// Move is derived from ParameterString in new parser, as it is referring to the direction. - Dorien
 		if (move == "north") {
 			roomID = roomArray[roomID].goToNorth;
 			Room newRoom(roomID);
