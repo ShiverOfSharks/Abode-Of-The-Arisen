@@ -180,7 +180,7 @@ string playerChoice(string inp)
 	string parameterString(parameter.begin(), parameter.end());
 
 	cout << "Command " << commandString << std::endl;
-	cout << "Parameter " << parameterString << std::endl << std::endl;  // may not work
+	cout << "Parameter " << parameterString << std::endl;  // may not work
 
 	return commandString;
 	/*
@@ -376,7 +376,7 @@ int main(){
 
 		string playerInput = validateInput();
 
-		string move = playerChoice(RoomID, playerInput);
+		string move = playerChoice(RoomID);
 
 
 		// zombieAttack(); //Zombie attacks player, run or fight
