@@ -13,6 +13,8 @@
 #include <string>
 #include <algorithm> 
 
+#define INPUT_ERROR "ERROR"
+
 
 //Global Variables + Event Flags
 string input = "N/A";
@@ -133,6 +135,7 @@ string playerChoice()
 	//cout << endl;
 	cout << "What would you like to do? ";
 	getline(cin, inp); //takes user input
+	cout << "**" << inp << "**";
 
 	// validateInput(inp); //validates user input
 	// Separate user input into a command (e.g. move, look, reset) & a parameter (e.g. north)
@@ -147,7 +150,7 @@ string playerChoice()
 	int i = 0;  // character position in string
 	if (inp.length() <= 2) {    // bad - but quick
 		std::cout << "Invalid entry " << inp << " Please renter ...\n";
-		return NULL;
+		return INPUT_ERROR;
 	}
 
 	while (isspace(inp[i])) {
@@ -160,7 +163,7 @@ string playerChoice()
 		command.push_back(inp[i]);
 		i++;
 	}
-	command.push_back('\0');  // terminate string
+	// command.push_back('\0');  // terminate string
 	cout << std::endl;
 	// move past white space, but if end of line - stop  --- note: this breaks if no end of line
 	while (isspace(inp[i]) && (inp[i] != '\0')) {
@@ -176,7 +179,7 @@ string playerChoice()
 	string commandString(command.begin(), command.end());
 	string parameterString(parameter.begin(), parameter.end());
 
-	cout << "Command " << commandString << std::endl;
+	cout << "Command **" << commandString << "**" << std::endl;
 	cout << "Parameter " << parameterString << std::endl;  // may not work
 
 	/* Proposed implementation - use nested if for movement, calling validateinput() to check before returning parameter string
@@ -184,7 +187,6 @@ string playerChoice()
 
 	if (commandString == "MOVE")  // ParameterString is the direction, so when it's called in main, that's what move needs to be for the code to work properly. - Dorien
 	{
-		validateInput(inp);
 		if (parameterString == "WEST") 
 		{
 			return parameterString;
@@ -204,111 +206,19 @@ string playerChoice()
 	}
 	else if (commandString == "RESET") 
 	{
-		validateInput(inp);
+		// validateInput(inp);
 		// Reset the game. Deferring this to later. - Dorien
 		return "Game reset! Close the window now.";
 	}
 	else if (commandString == "LOOK") 
 	{
 		DisplayDescription(RoomID);
+		return parameterString;
 	}
 
 	return "Something has gone wrong - this was supposed to output parameterString and proc movement.";
-	
-	/*
-	if (inp == "MOVE NORTH" || inp == "move north")
-	{
-		cout << "Moving north..." << endl;
-		ID = "Hallway North";
-	}
-	else if (inp == "MOVE SOUTH" || inp == "move south")
-	{
-		cout << "Heading south..." << endl;
-		ID = "Hallway South";
-	}
-	else if (inp == "MOVE EAST" || inp == "move east")
-	{
-		cout << "Heading east..." << endl;
-		ID = "Kitchen";
-	}
-	else if (inp == "MOVE WEST" || inp == "move west")
-	{
-		cout << "Heading west..." << endl;
-		ID = "Living Room";
-	}
-	else if (inp == "RESET" || inp == "reset")
-	{
-		system("CLS"); //clear screen
-		cout << "Starting over..." << endl;
-		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
-		DisplayBackstory();
-		playerChoice(RoomID, input);
-		//clear inventory
-		//reset events
-	}
-	else if (inp == "LOOK" || inp == "look")
-	{
-		LookAround(ID);
-	}
-	else if (inp == "PICK UP" || inp == "pick up") // We don't have an item class yet, so 'item' is just a stand in. - Dorien
-	{
-		// cout << "You pick up: " << item << endl;
-		// playerInventory += item;
-	}
-	else
-	{
-		cout << "Invalid input, try again." << endl;
-	}
-	*/
 
 }
-/* Old parser. Probably won't be reusing this, but keeping it while I implement this.
-
-string playerChoice(string ID, string inp) {
-	// get rid of white space
-	// change everything to either upper or lower case
-	// add quit, exit
-
-	if (inp == "MOVE NORTH" || inp == "move north")
-	{
-		cout << "Moving north..." << endl;
-		return "north";
-	}
-	else if (inp == "MOVE SOUTH" || inp == "move south")
-	{
-		cout << "Heading south..." << endl;
-		return "south";
-	}
-	else if (inp == "MOVE EAST" || inp == "move east")
-	{
-		cout << "Heading east..." << endl;
-		return "east";
-	}
-	else if (inp == "MOVE WEST" || inp == "move west")
-	{
-		cout << "Heading west..." << endl;
-		return "west";
-	}
-	else if (inp == "RESET" || inp == "reset")
-	{
-		system("CLS"); //clear screen
-		cout << "Starting over..." << endl;
-		ID = "Start"; //setting the ID to start for now, can be changed later - Doug
-		playerChoice(RoomID, input);
-
-		//reset events
-	}
-	else if (inp == "quit") //fixing quit function 
-	{
-		return "quit";
-	}
-	else
-	{
-		cout << "Invalid input, try again." << endl;
-	}
-	return "ERROR";
-
-} */ 
 
  
 void DisplayBackstory(string name) // Displays the opening preamble. Called to first thing in main() - Dorien
@@ -407,6 +317,11 @@ int main(){
 		cout << "What direction would you like to move (North, East, South, West): ";
 
 		string move = playerChoice();
+		cout << "You entered: " << move << endl;
+		if (move == INPUT_ERROR) {
+			count++;  // increment count so we don't repeat backstory, even though not a valid move
+			continue;
+		}
 
 
 		// zombieAttack(); //Zombie attacks player, run or fight
