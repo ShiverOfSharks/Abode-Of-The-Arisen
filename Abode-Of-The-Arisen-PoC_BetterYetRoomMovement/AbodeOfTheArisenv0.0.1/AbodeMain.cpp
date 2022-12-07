@@ -39,11 +39,11 @@ enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99 };
 string roomStrings[NUM_ROOMS] = { "Entry Way", "BATHROOM", "BEDROOM" };
 
 struct RoomMap {
-	int roomId;   // unique room identifier
-	int goToNorth;   // North
-	int goToSouth;   // South
-	int goToWest;    // West
-	int goToEast;	 // East
+	Rooms roomId;   // unique room identifier
+	Rooms goToNorth;   // North
+	Rooms goToSouth;   // South
+	Rooms goToWest;    // West
+	Rooms goToEast;	 // East
 };
 
 RoomMap roomArray[NUM_ROOMS] = {
@@ -105,9 +105,20 @@ string validateInput(string inp)
 	return inp;
 }
 
-void DisplayDescription(string ID)
+void DisplayDescription(Rooms ID)
 {
-
+	switch (ID) {
+	case HALLWAY:
+		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
+		break;
+	case BATHROOM:
+		cout << "You're in the bathroom. The air in here is cold - it's clearly not been used in a while, and the sink is dry. Maybe there'll be something of use in here later." << endl;
+		break;
+	case BEDROOM:
+		cout << "This would be the first floor bedroom - this was clearly the master bedroom as well. A large bed, two dressers, and a cabinet across, with TV, connected bathroom, the works. Might be a good place to rest, if not for the clawing arms at the windows and moans behind the walls..." << endl;
+		break;
+	}
+	/*
 	if (ID == "Entry Way")
 	{
 		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
@@ -124,6 +135,7 @@ void DisplayDescription(string ID)
 	{
 		cout << "This would be the first floor bedroom - this was clearly the master bedroom as well. A large bed, two dressers, and a cabinet across, with TV, connected bathroom, the works. Might be a good place to rest, if not for the clawing arms at the windows and moans behind the walls..." << endl;
 	}
+	*/
 
 }
 
@@ -206,14 +218,17 @@ string playerChoice()
 	}
 	else if (commandString == "RESET") 
 	{
-		// validateInput(inp);
 		// Reset the game. Deferring this to later. - Dorien
 		return "Game reset! Close the window now.";
 	}
+	else if (commandString == "QUIT")
+	{
+		return commandString;
+	}
 	else if (commandString == "LOOK") 
 	{
-		DisplayDescription(RoomID);
-		return parameterString;
+		// DisplayDescription(RoomID);  -- you don't know about the room here!  This is just the parser
+		return commandString;
 	}
 
 	return "Something has gone wrong - this was supposed to output parameterString and proc movement.";
@@ -283,7 +298,7 @@ int main(){
 
 
 	//Game loop related variables
-	int roomID = HALLWAY;   // set to starting room
+	Rooms roomID = HALLWAY;   // set to starting room
 	int count = 0; //checks the iteration of game loop
 
 
@@ -353,10 +368,13 @@ int main(){
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 			newRoom.printRoomInventory();
 		}
-		//CURRENTLY NOT FUNCTIONAL DUE TO INPUT ISSUES
+		//  quit works :)
 		//user interactions
-		else if (move == "quit") {
+		else if (move == "QUIT") {
 			break;
+		}
+		else if (move == "LOOK") {
+			DisplayDescription(roomID);
 		}
 		else if (move == "pick up") {
 			Room newRoom(roomID); //creates new room, find better way of accessing room
