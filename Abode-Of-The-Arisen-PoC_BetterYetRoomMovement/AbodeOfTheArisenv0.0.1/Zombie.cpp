@@ -42,3 +42,6 @@ void Enemy::setEnemyName(string newName) {
 void Enemy::setEnemyDamage(int newDamage) {
 	enemyDamage = newDamage;
 }
+
+// setter and getter for Zombie location
+//  store zombie location with an enum

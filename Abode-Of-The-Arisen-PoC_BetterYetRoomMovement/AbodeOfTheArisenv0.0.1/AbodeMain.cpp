@@ -225,6 +225,9 @@ string playerChoice()
 	{
 		return commandString;
 	}
+	else if (commandString == "ATTACK") {
+		return commandString;
+	}
 	else if (commandString == "LOOK") 
 	{
 		// DisplayDescription(RoomID);  -- you don't know about the room here!  This is just the parser
@@ -296,6 +299,9 @@ int main(){
 	Player player(tempName); //creates object with name input from user
 	system("cls");
 
+	// create zombie
+	// spawn zombie here - Enemy zombie ("zombie", 10);
+	// place it somewhere - set
 
 	//Game loop related variables
 	Rooms roomID = HALLWAY;   // set to starting room
@@ -376,10 +382,29 @@ int main(){
 		else if (move == "LOOK") {
 			DisplayDescription(roomID);
 		}
+		else if (move == "ATTACK") {
+			cout << "You just entered the command to attack" << endl;
+			// am I in the same room as the zombie - roomID == zombie.getEnemyLocation()  --- returns Rooms enum
+			// attack zombie - if zombie.isDead() --- ... print zombie dead message, all hail the conquering hero
+			// if not - do damage to player ... if player is dead .... print player death message & exit the game
+			// otherwise ... continue
+		}
 		else if (move == "pick up") {
 			Room newRoom(roomID); //creates new room, find better way of accessing room
 			player.addPlayerInvintory(newRoom.getRoomInventory()); //gets first item from the room invintory then adds that item to the player invintory
 		}
+
+		// zombie attack approach
+		//   lots of ways to do this
+		//   to keep it simple, let's assume you are a Kung Fu master (e.g. Bruce Lee), so your hands are your weapons
+		//   one approach - zombie only attacks (defends itself) when you attack
+		//   if user enters attack & zombie is in the same room  -- other cases, attack but no zombie
+		//     execute player attack
+		//     if zombie is dead - clean-up
+		//     if zombie not dead
+		//         zombieAttacks
+		//         if you are dead ... play the death march & end the game
+		//   and as long as you aren't dead, keep going
 		 
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
