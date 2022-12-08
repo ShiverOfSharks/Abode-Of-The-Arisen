@@ -253,7 +253,7 @@ void DisplayBackstory(string name) // Displays the opening preamble. Called to f
 
 
  //Zombie interaction
-int zombieAttack() {
+int zombieAttack() { // Gotta declare a player here as this function is defined before main - Dorien
 	
 	bool ZombieDefeat = false;
 
@@ -265,7 +265,7 @@ int zombieAttack() {
 	
 	while (ZombieDefeat = false) 
 	{
-		if (Player.)
+		
 	}
 	
 	// Simplifying this code to run a while loop to simulate combat - we never got around to running - Dorien
@@ -323,6 +323,7 @@ int main(){
 		string move = playerChoice(roomID);
 		cout << "You entered: " << move << endl;
 		if (move == INPUT_ERROR) {
+			cout << "Invalid input, incrementing...";
 			count++;  // increment count so we don't repeat backstory, even though not a valid move
 			continue;
 		}
@@ -367,7 +368,7 @@ int main(){
 		}
 		else if (move == "pick up") {
 			Room newRoom(roomID); //creates new room, find better way of accessing room
-			player.addPlayerInvintory(newRoom.getRoomInventory()); //gets first item from the room invintory then adds that item to the player invintory
+			player.addPlayerInventory(newRoom.getRoomInventory()); //gets first item from the room inventory then adds that item to the player inventory
 		}
 		 
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
