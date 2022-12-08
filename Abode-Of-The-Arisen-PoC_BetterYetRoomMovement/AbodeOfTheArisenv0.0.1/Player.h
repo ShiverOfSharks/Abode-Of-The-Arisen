@@ -10,7 +10,7 @@ class Player { //Player class
 private:
 
 	//Variables
-	list<Item> playerInvintory;
+	list<Item> playerInventory;
 	int playerDamage;
 	int playerHealth;
 	std::string playerName;
@@ -23,7 +23,7 @@ public:
 	 
 	std::string getPlayerName();
 	int getPlayerDamage();
-	void getPlayerInvintory();
+	void getPlayerInventory();
 	int getPlayerHealth();
 
 	//Setter Methods
@@ -33,7 +33,7 @@ public:
 	//Interation Mehtods
 	void attack();
 
-	void addPlayerInvintory(Item newItem);
+	void addPlayerInventory(Item newItem);
 	void printPlayerStats();
 };//class Player
 

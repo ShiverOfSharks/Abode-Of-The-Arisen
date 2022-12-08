@@ -10,6 +10,7 @@ using namespace std;
 		setItemDamage(10);
 		setItemName(name);
 		setItemDescription("itemDescription");
+		setEquipStatus(false);
 	}
 
 	 
@@ -26,6 +27,9 @@ using namespace std;
 		return itemDescription;
 	}
 
+	bool Item::getEquipStatus() {
+		return isWeapon;
+	}
 
 	//Setter Methods
 	void Item::setItemDamage(int new_itemDamage) {
@@ -38,4 +42,8 @@ using namespace std;
 
 	void Item::setItemDescription(string new_itemDescription) {
 		itemDescription=new_itemDescription;
+	}
+
+	bool Item::setEquipStatus(bool isEquippableNew) {
+		isWeapon = isEquippableNew;
 	}

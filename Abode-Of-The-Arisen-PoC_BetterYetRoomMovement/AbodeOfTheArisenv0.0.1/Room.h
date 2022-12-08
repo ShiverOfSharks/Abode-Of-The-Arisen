@@ -21,7 +21,7 @@ public:
 	std::string getRoomName();
 	void printRoomInventory();
 	string getRoomDescription();
-	void addRoomInvintory(Item newItem);
+	void addRoomInventory(Item newItem);
 	Item getRoomInventory();
 };//class Room
 

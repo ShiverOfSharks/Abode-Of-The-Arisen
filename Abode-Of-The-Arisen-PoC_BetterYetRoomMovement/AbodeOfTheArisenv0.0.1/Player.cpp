@@ -6,21 +6,21 @@ using namespace std;
  //Constructors
 
 Player::Player() {//Default Constructor
-	playerInvintory;
+	playerInventory;
 	playerName = "The Nameless";
 	setPlayerDamage(10);
 	setPlayerHealth(10);
 }
 
 Player::Player(string name) { //Constructor, name only
-	playerInvintory;
+	playerInventory;
 	playerName = name;
 	setPlayerDamage(10);
 	setPlayerHealth(10);
 }
  
 Player::Player(string name, int damage, int health){ //Constructor, name/damage/health
-	playerInvintory;
+	playerInventory;
 	playerName = name;
 	setPlayerDamage(damage);
 	setPlayerHealth(health);
@@ -28,12 +28,12 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 
 	// Getter Methods
 
-	void Player::getPlayerInvintory() {
+	void Player::getPlayerInventory() {
 		cout << "\n";
-		if (playerInvintory.size() == 0)
+		if (playerInventory.size() == 0)
 			cout << "	No Items.";
 		else
-			for (Item temp : playerInvintory) //prints each elements' name string
+			for (Item temp : playerInventory) //prints each elements' name string
 				cout << temp.getItemName() << " ";
 		cout << "\n";
 	}
@@ -60,13 +60,13 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 	}
 
 	void Player::setPlayerDamage(int new_playerDamage) {
-		//cout << "\n\nYou now do " << newDamage << " damage to enemies!\n\n"; //prompt to user
+		cout << "\n\nYou now do " << new_playerDamage << " damage to enemies!\n\n"; //prompt to user
 		playerDamage = new_playerDamage;
 	}
 
 
-	void Player::addPlayerInvintory(Item newItem) { //adds element to "playerInvintory" 
-		playerInvintory.push_back(newItem);
+	void Player::addPlayerInventory(Item newItem) { //adds element to "playerInventory" 
+		playerInventory.push_back(newItem);
 	}
 
 
@@ -79,8 +79,8 @@ Player::Player(string name, int damage, int health){ //Constructor, name/damage/
 		cout << "Your name is " << getPlayerName()
 			<< "\nYour stats are:\nDamage: " << getPlayerDamage()
 			<< "\nHealth is " << getPlayerHealth()
-			<< "\nThe items in your invintory: ";
-		getPlayerInvintory();
+			<< "\nThe items in your inventory: ";
+		getPlayerInventory();
 	
 	}
 

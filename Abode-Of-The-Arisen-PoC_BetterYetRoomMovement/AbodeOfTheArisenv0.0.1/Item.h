@@ -13,6 +13,8 @@ private:
 	int itemDamage;
 	std::string itemName;
 	std::string itemDescription;
+	bool isWeapon; 
+
 
 public:
 
@@ -23,11 +25,13 @@ public:
 	int getItemDamage();
 	std::string getItemName();
 	std::string getItemDescription();
+	bool getEquipStatus();
 	 
 	//Setter Methods
 	void setItemDamage(int new_itemDamage);
 	void setItemName(string new_itemName);
 	void setItemDescription(string new_itemDescription);
+	void setEquipStatus(bool isEquippable);
 
 };//class Player
 

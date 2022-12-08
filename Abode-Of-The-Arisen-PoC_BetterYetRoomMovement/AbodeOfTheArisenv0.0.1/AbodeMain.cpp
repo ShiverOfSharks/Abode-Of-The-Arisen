@@ -34,9 +34,9 @@ string abode[4][4] = { {"Bed Room","Hallway","Bath Room","Bath Room"},
 //   Create enums & string names for each room (Important - ToDo error checking, # of rooms MUST be consistent
 //   Initialize room movement array
 // ToDo - initialize room objects here as well - storing in an appropriate structure (possibly vector?)
-#define NUM_ROOMS 3
-enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, ERROR = 99 };
-string roomStrings[NUM_ROOMS] = { "Entry Way", "BATHROOM", "BEDROOM" };
+#define NUM_ROOMS 4
+enum Rooms { HALLWAY = 0, BATHROOM = 1, BEDROOM = 2, KITCHEN = 4, ERROR = 99 };
+string roomStrings[NUM_ROOMS] = { "HALLWAY", "BATHROOM", "BEDROOM", "KITCHEN"};
 
 struct RoomMap {
 	Rooms roomId;   // unique room identifier
@@ -47,9 +47,10 @@ struct RoomMap {
 };
 
 RoomMap roomArray[NUM_ROOMS] = {
-	{HALLWAY, BATHROOM, BEDROOM, BATHROOM, HALLWAY},  // Current room is Hallway, north goes to bathroom, south to bedroom
-	{BATHROOM, HALLWAY, BEDROOM, BATHROOM, HALLWAY},  // current room bathroom
-	{BEDROOM, HALLWAY, BATHROOM, BATHROOM, HALLWAY}   // current room bedroom
+	{HALLWAY, BATHROOM, BEDROOM, BATHROOM, KITCHEN},  // Current room is Hallway, north goes to bathroom, south to bedroom
+	{BATHROOM, BATHROOM, HALLWAY, HALLWAY, KITCHEN},  // current room bathroom
+	{BEDROOM, HALLWAY, BEDROOM, BEDROOM, KITCHEN},	  // current room bedroom
+	{KITCHEN, BATHROOM, BEDROOM, HALLWAY, KITCHEN}	  // current room kitchen
 };
 
 
@@ -112,10 +113,10 @@ void DisplayDescription(Rooms ID)
 		cout << "You're still in the middle of the hallway. There's not much to do here other than connect to the other rooms right now." << endl;
 		break;
 	case BATHROOM:
-		cout << "You're in the bathroom. The air in here is cold - it's clearly not been used in a while, and the sink is dry. Maybe there'll be something of use in here later." << endl;
+		cout << "You're in the bathroom. The air in here is cold - but as mentioned, someone's been here. They left behind, other than the blood, a bloodied hammer that still looks to be of use, and a hardhat. Maybe a construction worker lived here." << endl;
 		break;
 	case BEDROOM:
-		cout << "This would be the first floor bedroom - this was clearly the master bedroom as well. A large bed, two dressers, and a cabinet across, with TV, connected bathroom, the works. Might be a good place to rest, if not for the clawing arms at the windows and moans behind the walls..." << endl;
+		cout << "This would be the first floor bedroom - this was clearly the master bedroom as well. A large bed, two dressers, and a cabinet across, with TV, connected bathroom, the works. Might be a good place to rest, if not for the clawing arms at the windows and moans behind the walls...You check underneath the bed, and find a baseball bat, presumably for home defense." << endl;
 		break;
 	}
 	/*
@@ -141,7 +142,7 @@ void DisplayDescription(Rooms ID)
 
 // Professor Vallone's Parser being inplemented. - Dorien
 
-string playerChoice()
+string playerChoice(Rooms roomname)
 {
 	string inp;
 	//cout << endl;
@@ -227,7 +228,7 @@ string playerChoice()
 	}
 	else if (commandString == "LOOK") 
 	{
-		// DisplayDescription(RoomID);  -- you don't know about the room here!  This is just the parser
+		DisplayDescription(roomname);
 		return commandString;
 	}
 
@@ -253,33 +254,21 @@ void DisplayBackstory(string name) // Displays the opening preamble. Called to f
 
  //Zombie interaction
 int zombieAttack() {
-	string tempInput;
 	
-	cout << "YOU ARE ATTACKED BY A ZOMBIE!!!";
+	bool ZombieDefeat = false;
+
+	cout << "With a telltale growl of anger, a zombie attacks!";
 	Enemy theZombie("zombie");
 	theZombie.attack();
 	cout << theZombie.getEnemyName() << "\n" << theZombie.getEnemyDamage() << endl;
-	cout << "\n Would you like to run or fight\n Enter 'run' or 'fight': ";
-	cin >> tempInput;
-
-	//logic
-	if (tempInput == "run") {
-		int randomNum = rand() % 4;
-		if (randomNum == 0) return 0;// "return 0" is a place holder until the parser in this code is fixed, reutrn movement when fixed
-		//move north
-		else if (randomNum == 1) return 0;
-		//move east
-		else if (randomNum == 2) return 0;
-		//move south
-		else return 0;
-			//move west
-			return theZombie.getEnemyDamage(); //To be subtracted from player health, posibly lower health over 3 cycles of game loop
-	}//if(tempInput == "run")
-
-	else {
-		//invoke combat method then return calculation
-		return 0;
-	}//else
+	cout << "Use the 'ATTACK' command to try and defeat it! ";
+	
+	while (ZombieDefeat = false) 
+	{
+		if (Player.)
+	}
+	
+	// Simplifying this code to run a while loop to simulate combat - we never got around to running - Dorien
 }//zombieAttack()
 
 
@@ -331,7 +320,7 @@ int main(){
 		//    will just wait forever
 		cout << "What direction would you like to move (North, East, South, West): ";
 
-		string move = playerChoice();
+		string move = playerChoice(roomID);
 		cout << "You entered: " << move << endl;
 		if (move == INPUT_ERROR) {
 			count++;  // increment count so we don't repeat backstory, even though not a valid move
@@ -344,25 +333,25 @@ int main(){
 		// PoC for room movement
 		// new roomID is derived from current room structure (roomArray[] ) for user specified direction (e.g. go to north)
 		// Move is derived from ParameterString in new parser, as it is referring to the direction. - Dorien
-		if (move == "north") {
+		if (move == "NORTH") {
 			roomID = roomArray[roomID].goToNorth;
 			Room newRoom(roomID);
 			cout<<"\n\n"<<newRoom.getRoomDescription()<<"\n\n";
 			newRoom.printRoomInventory();
 		}
-		else if (move == "south") {
+		else if (move == "SOUTH") {
 			roomID = roomArray[roomID].goToSouth;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 			newRoom.printRoomInventory();
 		}
-		else if (move == "west") {
+		else if (move == "WEST") {
 			roomID = roomArray[roomID].goToWest;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
 			newRoom.printRoomInventory();
 		}
-		else if (move == "east") {
+		else if (move == "EAST") {
 			roomID = roomArray[roomID].goToEast;
 			Room newRoom(roomID);
 			cout << "\n\n" << newRoom.getRoomDescription() << "\n\n";
@@ -393,7 +382,7 @@ int main(){
 	
 	//Ending Prompts to user
 	cout << "\n\n\t   GAME OVER\n";
-	if (player.getPlayerHealth() != 0) cout << "\tYou Survived!!!\n"; //player "survives" if the game ends and their health is not 0
+	if (player.getPlayerHealth() != 0) cout << "\tEnd Of Demo\n"; //player "survives" if the game ends and their health is not 0
 	cout << "\tYou made " << count << " moves.\n\n";
 
 	//looks nicer
