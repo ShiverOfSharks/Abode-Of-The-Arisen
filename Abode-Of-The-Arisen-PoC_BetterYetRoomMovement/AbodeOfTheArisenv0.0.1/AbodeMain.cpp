@@ -13,6 +13,8 @@
 #include <string>
 #include <algorithm> 
 
+using namespace std; 
+
 #define INPUT_ERROR "ERROR"
 
 
@@ -20,6 +22,7 @@
 string input = "N/A";
 bool AlarmOff = false; // Event Flag: Did the player turn off the alarm in the kitchen yet? - Dorien
 string RoomID = "start"; // Where is the player right now, used for the first input since the player is not able to move north or west right at the beginning
+bool ThirdZombieDead = false; //Event Flag: Has the player fought and killed three zombies? - Dorien
 
 
 //change string to "Room" 
@@ -98,9 +101,9 @@ string validateInput(string inp)
 			&& inp != "RESET" && inp != "reset"
 			&& inp != "LOOK" && inp != "look")
 		{
-			cout << "Please enter a valid input response: \n";
+			cout << "Please enter a valid input response. \n";
 			getline(cin, inp);
-			// input = inp;
+			
 		}
 	}
 	return inp;
@@ -148,9 +151,9 @@ string playerChoice(Rooms roomname)
 	//cout << endl;
 	cout << "What would you like to do? ";
 	getline(cin, inp); //takes user input
-	cout << "**" << inp << "**";
+	cout << "**" << inp << "**"; 
 
-	// validateInput(inp); //validates user input
+	validateInput(inp);
 	// Separate user input into a command (e.g. move, look, reset) & a parameter (e.g. north)
 	// string format should be: <whitespace?>command<whitespace>parameter<whitespace/endl>
 
@@ -235,7 +238,7 @@ string playerChoice(Rooms roomname)
 		return commandString;
 	}
 
-	return "Something has gone wrong - this was supposed to output parameterString and proc movement.";
+	return "Something has gone wrong...invalid input.";
 
 }
 
@@ -266,10 +269,8 @@ int zombieAttack() { // Gotta declare a player here as this function is defined 
 	cout << theZombie.getEnemyName() << "\n" << theZombie.getEnemyDamage() << endl;
 	cout << "Use the 'ATTACK' command to try and defeat it! ";
 	
-	while (ZombieDefeat = false) 
-	{
-		
-	}
+
+	return 0;
 	
 	// Simplifying this code to run a while loop to simulate combat - we never got around to running - Dorien
 }//zombieAttack()
@@ -295,7 +296,6 @@ int main(){
 	//Game loop related variables
 	Rooms roomID = HALLWAY;   // set to starting room
 	int count = 0; //checks the iteration of game loop
-
 
 	//Game Loop
 	do{ 
@@ -324,9 +324,8 @@ int main(){
 		//  Parsing the input and returning the command (e.g. north - from MOVE NORTH)
 		//  Note - this separation is required to support automated testing, as otherwise the test code
 		//    will just wait forever
-		cout << "What direction would you like to move (North, East, South, West): ";
-
 		string move = playerChoice(roomID);
+
 		cout << "You entered: " << move << endl;
 		if (move == INPUT_ERROR) {
 			cout << "Invalid input, incrementing...";
@@ -399,7 +398,7 @@ int main(){
 		cout << "\n\nYou are now in = " << roomStrings[roomID] << endl;
 
 		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
-		if (count == 4) break; //ends loop after 4 inputs because can not quit from user input
+		if (count == 6) break; //ends loop after 4 inputs because can not quit from user input
 		/// FOR TESTING REMOVE WHEN QUITE INPUT WORKS ///
 
 

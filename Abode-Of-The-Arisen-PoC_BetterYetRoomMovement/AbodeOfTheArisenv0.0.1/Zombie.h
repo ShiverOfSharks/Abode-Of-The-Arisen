@@ -9,7 +9,9 @@ private:
 
 	//Variables
 	int enemyDamage;
+	int enemyHealth;
 	std::string enemyName;
+	enum enemyLocation place;
 public:
 	 
 	//Methods
@@ -18,9 +20,13 @@ public:
 	void attack();
 	std::string getEnemyName();
 	int getEnemyDamage();
+	int getEnemyHealth();
+	void getEnemyLocation();
 
 	void setEnemyName(std::string newName);
 	void setEnemyDamage(int newDamage);
+	void setEnemyLocation(enum room roomID); 
+	void setEnemyHealth(int newHealth);
 
 
 };//class Zombie : public Enemy

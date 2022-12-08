@@ -35,6 +35,10 @@ int Enemy::getEnemyDamage() {
 	return enemyDamage;
 }
 
+int Enemy::getEnemyHealth() {
+	return enemyHealth;
+}
+
 
 void Enemy::setEnemyName(string newName) {
 	enemyName = newName;
@@ -43,5 +47,15 @@ void Enemy::setEnemyDamage(int newDamage) {
 	enemyDamage = newDamage;
 }
 
-// setter and getter for Zombie location
-//  store zombie location with an enum
+void Enemy::setEnemyHealth(int newHealth) {
+	enemyHealth = newHealth; 
+}
+
+
+void Enemy::setEnemyLocation(enum room roomID) {
+	place == roomID;
+}
+
+void Enemy::getEnemyLocation(room roomID) {
+	return roomID;
+}

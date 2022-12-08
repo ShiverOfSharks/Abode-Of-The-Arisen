@@ -44,6 +44,6 @@ using namespace std;
 		itemDescription=new_itemDescription;
 	}
 
-	bool Item::setEquipStatus(bool isEquippableNew) {
+	void Item::setEquipStatus(bool isEquippableNew) {
 		isWeapon = isEquippableNew;
 	}
